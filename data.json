@@ -6,6 +6,7 @@
     "linkedin": "https://linkedin.com/in/kevinvillabona",
     "github": "https://github.com/kevinvillabona",
     "cv_file": "docs/kevin-villabona-cv-es.pdf",
+    "avatar": ["images/final_1.png", "images/final_2.png"],
     "summary": "Líder Técnico y Desarrollador de software especializado en diseño de arquitecturas .NET y optimización de procesos. Base en Argentina, mentalidad global.",
     "location": "Argentina"
   },
@@ -19,17 +20,53 @@
   "experience": [
     {
       "company": "Libercam",
-      "role": "Líder Técnico",
-      "date": "Nov 2025 - Presente",
-      "desc": "Definición de arquitectura y roadmaps. Referente técnico responsable de calidad y pases a producción.",
-      "logo": "images/logo-libercam.png"
+      "location": "CABA, Argentina",
+      "logo": "images/logo-libercam.png",
+      "roles": [
+        {
+          "title": "Líder Técnico",
+          "date": "Nov 2025 - Presente",
+          "tasks": [
+            "Definición de arquitectura de software y roadmaps estratégicos para nuevos módulos.",
+            "Referente técnico final responsable de pases a producción y calidad del código.",
+            "Liderazgo en reingeniería de sistemas y migración de integraciones a procesos ETL.",
+            "Mentoría técnica del equipo y gestión de documentación en Jira."
+          ]
+        },
+        {
+          "title": "Jefe de Programadores",
+          "date": "May 2025 - Nov 2025",
+          "tasks": [
+            "Resolución de tickets de alta prioridad garantizando continuidad operativa crítica.",
+            "Consultor principal para desbloquear al equipo operativo en desafíos técnicos.",
+            "Participación activa en procesos de selección de personal técnico."
+          ]
+        },
+        {
+          "title": "Desarrollador .NET",
+          "date": "Abr 2024 - May 2025",
+          "tasks": [
+            "Desarrollo y mantenimiento de ERP corporativo robusto en .NET Core.",
+            "Liderazgo Front-end: Implementación de UI con C#, JavaScript y Bootstrap."
+          ]
+        }
+      ]
     },
     {
       "company": "Armada Argentina",
-      "role": "Desarrollador de Software",
-      "date": "Abr 2021 - Presente",
-      "desc": "Desarrollo Full Stack de aplicaciones críticas con ASP.NET MVC 5 y C#. Seguridad y alta disponibilidad.",
-      "logo": "images/logo-armada.png"
+      "location": "CABA, Argentina",
+      "logo": "images/logo-armada.png",
+      "roles": [
+        {
+          "title": "Desarrollador de Software",
+          "date": "Abr 2021 - Presente",
+          "tasks": [
+            "Desarrollo Full Stack de aplicaciones web críticas con ASP.NET MVC 5 y C#.",
+            "Diseño de componentes reutilizables y estandarización de interfaces de usuario.",
+            "Documentación técnica y soporte especializado a sistemas de defensa."
+          ]
+        }
+      ]
     }
   ],
   "projects": [

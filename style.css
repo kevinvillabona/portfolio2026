@@ -134,6 +134,92 @@ body {
     to { transform: rotate(360deg); }
 }
 
+/* Corrección para sombra dinámica usando variable CSS */
+.timeline-dot-shadow {
+    box-shadow: 0 0 0 4px var(--bg-primary), 0 0 20px var(--accent-color);
+}
+
+/* === ANIMACIÓN DE LÍNEA DE SERPIENTE (SNAKE LINE) === */
+@keyframes snake-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Esta clase maneja el color y la animación */
+.snake-gradient-bg {
+    /* Los colores del botón: Morado suave -> Rojo intenso -> Morado suave */
+    background: linear-gradient(90deg, #E2CBFF, var(--accent-color), #E2CBFF);
+    background-size: 200% 200%;
+    animation: snake-flow 3s linear infinite;
+}
+
+/* Utility para las curvas suaves */
+.snake-connector {
+    position: absolute;
+    width: 100%;
+    height: 50px; /* Altura de la curva entre tarjetas */
+    bottom: -50px; /* Se ubica justo debajo de la tarjeta */
+    z-index: 0;
+}
+
+/* Contenedor principal */
+.timeline-container {
+    position: relative;
+    width: 100%;
+}
+
+/* El SVG solo para Desktop */
+.timeline-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: none; /* Oculto por defecto (móvil) */
+}
+
+/* Mostrar SVG solo en pantallas medianas hacia arriba */
+@media (min-width: 768px) {
+    .timeline-svg {
+        display: block;
+    }
+}
+
+/* Línea recta para móvil con gradiente animado */
+.mobile-line-gradient {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #E2CBFF, var(--accent-color), #E2CBFF);
+    background-size: 200% 200%;
+    animation: snake-flow 3s linear infinite;
+    border-radius: 99px;
+}
+
+/* La tarjeta debe estar por encima de la línea */
+.timeline-card-wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+/* Animación del flujo del gradiente dentro del SVG */
+.gradient-flow {
+    animation: flowAnimation 3s linear infinite;
+}
+
+@keyframes flowAnimation {
+    0% { stop-color: #E2CBFF; }
+    50% { stop-color: var(--accent-color); }
+    100% { stop-color: #E2CBFF; }
+}
+
+
+
 /* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
