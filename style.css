@@ -1,94 +1,141 @@
-/* --- VARIABLES DINÁMICAS (LA MAGIA DEL COLOR) --- */
-@layer base {
-    :root {
-        /* MODO CLARO: Rojo Original (Intenso) */
-        /* RGB: 217 4 41 (#D90429) */
-        --color-brand-red: 217 4 41; 
-    }
-
-    .dark {
-        /* MODO OSCURO: Rojo Coral (Suave/Rosado) */
-        /* RGB: 233 69 80 (#E94550) */
-        --color-brand-red: 233 69 80; 
-    }
+/* === CONFIGURACIÓN DE VARIABLES CSS (THEMING) === */
+:root {
+    /* --- MODO CLARO --- */
+    --bg-primary: #f8fafc;       /* Slate-50 */
+    --bg-card: #ffffff;          /* White */
+    --text-primary: #0f172a;     /* Slate-900 */
+    --text-secondary: #475569;   /* Slate-600 */
+    --accent-color: #cc0000;     /* ROJO OSCURO (Pedido) */
+    --border-color: rgba(0, 0, 0, 0.08);
+    --grid-color: rgba(0, 0, 0, 0.05);
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --btn-bg: #ffffff;           /* Fondo del botón en modo claro */
 }
 
-/* --- UTILIDADES --- */
-html {
+.dark {
+    /* --- MODO OSCURO (Original) --- */
+    --bg-primary: #000319;       /* Black-100 */
+    --bg-card: #04071D;          /* Card Dark */
+    --text-primary: #E4ECFF;     /* White-100 */
+    --text-secondary: #C1C2D5;   /* White-200 */
+    --accent-color: #ff4757;     /* ROJO VIBRANTE (Original) */
+    --border-color: rgba(255, 255, 255, 0.1);
+    /* --grid-color: rgba(255, 255, 255, 0.15); Opacidad original */
+    --grid-color: rgb(169 169 169 / 6%); /* Gris claro con opacidad reducida */
+    --nav-bg: rgba(0, 3, 25, 0.7);
+    --btn-bg: #000319;           /* Fondo del botón en modo oscuro (Igual al bg-primary) */
+}
+
+/* === BASE === */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
     scroll-behavior: smooth;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #0F1115; 
-}
-::-webkit-scrollbar-thumb {
-    background: #2A2E37; 
-    border-radius: 4px;
-    border: 2px solid #0F1115;
-}
-/* El hover del scrollbar también usará la variable dinámica */
-::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--color-brand-red)); 
+/* === FONDO DE CUADRÍCULA (GRID) === */
+.bg-grid-pattern {
+    background-size: 90px 90px;
+    background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    transition: background-image 0.5s ease;
 }
 
-/* --- CLASES DE ESTRUCTURA --- */
-.std-container {
-    max-width: 80rem; 
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1.5rem; 
-    padding-right: 1.5rem;
+/* MÁSCARAS */
+.mask-gradient-hero {
+    mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 90%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 90%);
+}
+.mask-gradient-footer {
+    mask-image: linear-gradient(to top, black 0%, black 40%, transparent 90%);
+    -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 90%);
 }
 
-@media (min-width: 768px) {
-    .std-container {
-        padding-left: 3rem; 
-        padding-right: 3rem;
-    }
+/* === DESTELLOS (GLEAMS) - Sutiles === */
+.grid-gleam {
+    position: absolute;
+    width: 6px; /* Más pequeños */
+    height: 6px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    filter: blur(2px); /* Blur reducido */
+    opacity: 0;
+    animation: gleam-pulse 4s infinite ease-in-out;
 }
 
-/* Tech Card Styles */
-.tech-card {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-    will-change: transform, opacity;
-    display: flex;
-    flex-direction: column;
-}
-.tech-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15); 
-}
-.dark .tech-card:hover {
-    box-shadow: 0 20px 40px -15px rgba(0, 5, 15, 0.5);
+@keyframes gleam-pulse {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 0.6; transform: scale(1.2); } /* Opacidad máxima reducida */
 }
 
-/* Glitch sutil en avatar */
-.avatar-container {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.avatar-container:hover {
-    transform: scale(1.02) rotate(1deg);
-}
-
-/* Animaciones */
-@keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
-}
-.animate-bounce-slow {
-    animation: bounce-slow 2s infinite;
+/* === TARJETAS (GLOW CARDS) - Sutil === */
+.glow-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    /* Sin box-shadow por defecto */
 }
 
-/* Reset inputs */
-input, textarea {
-    background: transparent;
-    border-radius: 0;
-    -webkit-appearance: none;
+/* Gradiente sutil solo en dark mode */
+.dark .glow-card {
+    background: linear-gradient(90deg, #04071D 0%, #0c0e23 100%);
 }
-input:focus, textarea:focus {
-    outline: none;
+
+.glow-card:hover {
+    border-color: var(--accent-color); /* Solo cambia el borde */
+    /* SIN SOMBRA DIFUSA EXTERNA */
 }
+
+/* === BOTÓN MÁGICO (RESTAURADO) === */
+.magic-btn-container {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1px; /* El grosor del borde animado */
+}
+
+.magic-btn-border {
+    position: absolute;
+    inset: -1000%;
+    animation: spin 3s linear infinite;
+    /* Gradiente cónico sutil usando el color de acento */
+    background: conic-gradient(from 90deg at 50% 50%, #E2CBFF 0%, var(--accent-color) 50%, #E2CBFF 100%);
+}
+
+/* Fondo interior del botón */
+.magic-btn-content {
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem; /* rounded-xl */
+    background-color: var(--btn-bg); /* Fondo sólido */
+    padding-left: 2.5rem; /* px-10 */
+    padding-right: 2.5rem;
+    padding-top: 1rem; /* py-4 */
+    padding-bottom: 1rem;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: var(--text-primary);
+    backdrop-filter: blur(64px); /* backdrop-blur-3xl */
+    gap: 0.5rem;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 4px; opacity: 0.5; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
