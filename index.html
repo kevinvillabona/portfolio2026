@@ -7,6 +7,8 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
@@ -34,9 +36,9 @@
     </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased selection:bg-[#cc0000] dark:selection:bg-[#ff4757] selection:text-white">
+<body class="antialiased selection:bg-[#cc0000] dark:selection:bg-[#ff4757] selection:text-white overflow-x-hidden">
 
-    <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center">
+    <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100">
         <div class="flex items-center gap-4 md:gap-6 px-6 md:px-8 py-3 rounded-full border border-[var(--border-color)] bg-[var(--nav-bg)] backdrop-blur-lg text-xs md:text-sm font-medium text-[var(--text-secondary)] shadow-lg dark:shadow-none shadow-[var(--border-color)]">
             <a href="#about" class="hover:text-[var(--accent-color)] transition-colors">Perfil</a>
             <a href="#projects" class="hover:text-[var(--accent-color)] transition-colors">Proyectos</a>
@@ -73,21 +75,21 @@
     </section>
 
     <section class="py-20 max-w-7xl mx-auto px-5 md:px-10" id="projects">
-        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]">
+        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]" data-aos="fade-up">
             Proyectos <span class="text-[var(--accent-color)]">Recientes</span>
         </h2>
         <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16"></div>
     </section>
 
     <section class="py-20 max-w-7xl mx-auto px-5 md:px-10" id="experience">
-        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]">
+        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]" data-aos="fade-up">
             Experiencia <span class="text-[var(--accent-color)]">Laboral</span>
         </h2>
         <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
     </section>
 
     <section class="py-10 max-w-7xl mx-auto px-5 md:px-10" id="education">
-        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]">
+        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]" data-aos="fade-up">
             Formación <span class="text-[var(--accent-color)]">Académica</span>
         </h2>
         <div id="education-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
@@ -96,7 +98,7 @@
     <footer class="relative pt-20 pb-10 w-full overflow-hidden flex flex-col items-center" id="contact">
         <div class="absolute inset-0 w-full h-full bg-grid-pattern mask-gradient-footer pointer-events-none"></div>
         
-        <div class="relative z-10 flex flex-col items-center text-center px-4">
+        <div class="relative z-10 flex flex-col items-center text-center px-4" data-aos="zoom-in-up" data-aos-delay="200">
              <h2 class="font-heading text-3xl md:text-5xl lg:text-6xl font-bold max-w-4xl mb-6 text-[var(--text-primary)]">
                 ¿Listo para <span class="text-[var(--accent-color)]">impulsar tu proyecto</span>?
             </h2>
@@ -109,7 +111,7 @@
                 </span>
             </a>
 
-            <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mt-10 text-[var(--text-secondary)] text-sm gap-4 px-10 border-t border-[var(--border-color)] pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mt-10 text-[var(--text-secondary)] text-sm gap-4 px-10 border-[var(--border-color)] pt-8">
                 <p id="copyright"></p>
                 <div class="flex gap-4">
                     <a id="social-linkedin" href="#" target="_blank" class="w-10 h-10 rounded-lg bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all"><i class="fab fa-linkedin-in text-lg"></i></a>
@@ -119,6 +121,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

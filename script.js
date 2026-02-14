@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
             renderExperience(data.experience);
             renderEducation(data.education);
             renderFooter(data.profile);
+            
+            // Inicializar animaciones DESPUÉS de renderizar el contenido
+            AOS.init({
+                duration: 800, // Duración suave
+                once: true,    // Animar solo una vez al bajar
+                offset: 100,   // Trigger un poco antes de aparecer
+                easing: 'ease-out-cubic'
+            });
         })
         .catch(error => console.error('Error cargando datos:', error));
 });
@@ -46,17 +54,17 @@ function initTheme() {
 function renderHero(profile) {
     const heroContent = document.getElementById('hero-content');
     heroContent.innerHTML = `
-        <p class="uppercase tracking-widest text-xs text-[var(--text-secondary)] max-w-80 mb-6 font-semibold">
+        <p class="uppercase tracking-widest text-xs text-[var(--text-secondary)] max-w-80 mb-6 font-semibold" data-aos="fade-down" data-aos-delay="200">
             ${profile.title}
         </p>
-        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-tight text-[var(--text-primary)]">
+        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-tight text-[var(--text-primary)]" data-aos="fade-up" data-aos-delay="300">
             Transformando Ideas en<br>
             <span class="text-[var(--accent-color)]">Experiencias Digitales</span>
         </h1>
-        <p class="text-[var(--text-secondary)] md:tracking-wider mb-10 text-sm md:text-lg lg:text-xl max-w-2xl">
+        <p class="text-[var(--text-secondary)] md:tracking-wider mb-10 text-sm md:text-lg lg:text-xl max-w-2xl" data-aos="fade-up" data-aos-delay="400">
             ${profile.summary}
         </p>
-        <div class="flex gap-4">
+        <div class="flex gap-4" data-aos="fade-up" data-aos-delay="500">
             <a href="#projects" class="magic-btn-container group">
                 <span class="magic-btn-border"></span>
                 <span class="magic-btn-content group-hover:text-[var(--accent-color)]">
@@ -78,7 +86,7 @@ function renderBento(data) {
     ).join('');
 
     grid.innerHTML = `
-        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl min-h-[40vh] relative overflow-hidden flex flex-col justify-end p-8 group">
+        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl min-h-[40vh] relative overflow-hidden flex flex-col justify-end p-8 group" data-aos="fade-right" data-aos-delay="100">
             <div class="absolute inset-0">
                  <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000" class="w-full h-full object-cover opacity-20 dark:opacity-40 group-hover:scale-105 transition-transform duration-500">
                  <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] to-transparent"></div>
@@ -90,7 +98,7 @@ function renderBento(data) {
             </div>
         </div>
 
-        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl min-h-[40vh] relative overflow-hidden flex flex-col p-8 items-start justify-start">
+        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl min-h-[40vh] relative overflow-hidden flex flex-col p-8 items-start justify-start" data-aos="fade-left" data-aos-delay="200">
              <div class="absolute inset-0">
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000" class="w-full h-full object-cover opacity-30 dark:opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
                 <div class="absolute inset-0 bg-gradient-to-b from-[var(--bg-card)]/50 to-[var(--bg-card)]"></div>
@@ -107,7 +115,7 @@ function renderBento(data) {
              </div>
         </div>
 
-        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 h-full justify-center">
+        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 h-full justify-center" data-aos="fade-up" data-aos-delay="300">
             <p class="text-[var(--text-secondary)] text-sm mb-2 uppercase tracking-wider font-semibold">Tech Stack</p>
             <h3 class="font-heading font-bold text-2xl mb-6 text-[var(--text-primary)]">Mis Herramientas</h3>
             <div class="flex gap-2 lg:gap-3 w-fit absolute -right-3 lg:-right-2 h-full overflow-hidden mask-gradient-hero">
@@ -116,7 +124,7 @@ function renderBento(data) {
             </div>
         </div>
 
-        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl relative overflow-hidden flex flex-col items-center justify-center p-8 min-h-[30vh]">
+        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl relative overflow-hidden flex flex-col items-center justify-center p-8 min-h-[30vh]" data-aos="zoom-in" data-aos-delay="400">
              <div class="font-mono text-[10px] absolute inset-0 text-[var(--text-secondary)] opacity-10 p-4 leading-relaxed overflow-hidden select-none">
                   import pandas as pd<br>model = Sequential()<br>model.compile(optimizer='adam')<br>loss='mse'
              </div>
@@ -131,12 +139,13 @@ function renderBento(data) {
 
 function renderProjects(projects) {
     const container = document.getElementById('projects-grid');
-    container.innerHTML = projects.map(proj => {
+    container.innerHTML = projects.map((proj, index) => {
         const tagsHTML = proj.tags.map(tag => 
             `<div class="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-secondary)] flex items-center justify-center text-[10px] font-bold" title="${tag}">${tag}</div>`
         ).join('');
+        // Staggered delay logic: index * 100ms
         return `
-        <div class="flex flex-col items-center justify-center w-full">
+        <div class="flex flex-col items-center justify-center w-full" data-aos="fade-up" data-aos-delay="${index * 150}">
             <div class="w-full h-[300px] md:h-[400px] bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] overflow-hidden relative mb-6 group">
                  <div class="w-full h-full p-6 flex items-center justify-center relative overflow-hidden">
                     <div class="absolute bottom-0 left-0 right-0 h-[90%] w-[90%] mx-auto bg-[var(--bg-primary)] rounded-t-xl border-t border-l border-r border-[var(--border-color)] overflow-hidden transition-transform duration-500 group-hover:translate-y-2 group-hover:scale-[1.02]">
@@ -159,8 +168,8 @@ function renderProjects(projects) {
 
 function renderExperience(experience) {
     const container = document.getElementById('experience-grid');
-    container.innerHTML = experience.map(job => `
-        <div class="glow-card p-6 md:p-8 rounded-2xl flex gap-6 items-start">
+    container.innerHTML = experience.map((job, index) => `
+        <div class="glow-card p-6 md:p-8 rounded-2xl flex gap-6 items-start" data-aos="fade-left" data-aos-delay="${index * 150}">
             <div class="w-16 h-16 md:w-20 md:h-20 bg-[var(--bg-primary)] rounded-xl flex items-center justify-center shrink-0 border border-[var(--border-color)] overflow-hidden p-2">
                 <img src="${job.logo}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" class="object-contain w-full h-full">
                 <i class="fas fa-briefcase text-2xl text-[var(--text-secondary)]" style="display:none;"></i>
@@ -176,8 +185,8 @@ function renderExperience(experience) {
 
 function renderEducation(edu) {
     const container = document.getElementById('education-grid');
-    container.innerHTML = edu.map(item => `
-        <div class="glow-card p-6 rounded-2xl relative group hover:-translate-y-2 transition-transform">
+    container.innerHTML = edu.map((item, index) => `
+        <div class="glow-card p-6 rounded-2xl relative group hover:-translate-y-2 transition-transform" data-aos="zoom-in" data-aos-delay="${index * 100}">
             <div class="absolute top-4 right-4 text-[var(--accent-color)] opacity-50"><i class="fas fa-graduation-cap text-2xl"></i></div>
             <h3 class="font-heading font-bold text-lg mb-1 text-[var(--text-primary)]">${item.degree}</h3>
             <p class="text-sm text-[var(--text-secondary)] mb-2">${item.school}</p>

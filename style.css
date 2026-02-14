@@ -21,7 +21,7 @@
     --accent-color: #ff4757;     /* ROJO VIBRANTE (Original) */
     --border-color: rgba(255, 255, 255, 0.1);
     /* --grid-color: rgba(255, 255, 255, 0.15); Opacidad original */
-    --grid-color: rgb(169 169 169 / 6%); /* Gris claro con opacidad reducida */
+    --grid-color: rgb(169 169 169 / 8%); /* Gris claro con opacidad reducida */
     --nav-bg: rgba(0, 3, 25, 0.7);
     --btn-bg: #000319;           /* Fondo del botón en modo oscuro (Igual al bg-primary) */
 }
@@ -30,7 +30,7 @@
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    overflow-x: hidden;
+    overflow-x: hidden; /* Crucial para AOS animations */
     scroll-behavior: smooth;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
