@@ -223,7 +223,7 @@ function renderExperience(experience) {
                 data-aos="${fadeDir}" data-aos-delay="100">
                 
                 <div class="glow-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-xl group hover:border-[var(--accent-color)] transition-all duration-300">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8 border-b border-[var(--border-color)] pb-6">
+                    <div class="flex flex-row items-start sm:items-center gap-5 mb-8 border-b border-[var(--border-color)] pb-6">
                         <div class="w-16 h-16 bg-[var(--bg-primary)] rounded-2xl p-3 border border-[var(--border-color)] flex items-center justify-center shrink-0 shadow-sm">
                             <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain" 
                                  onload="initTimelineLines(${experience.length})"
@@ -232,7 +232,8 @@ function renderExperience(experience) {
                         <div>
                             <h3 class="font-heading text-2xl font-bold text-[var(--text-primary)] mb-1">${company.company}</h3>
                             <p class="text-sm font-medium text-[var(--text-secondary)] flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-[var(--accent-color)]"></span>
+                                
+                                <i class="fa-solid fa-location-dot text-[var(--accent-color)]"></i>
                                 ${company.location}
                             </p>
                         </div>
@@ -383,7 +384,7 @@ function initTimelineLines(count) {
 function loopAnimation() {
     // 1. Calcular el punto de trigger (dónde "escribe" el lápiz)
     // Usamos el 80% de la altura de la ventana para que se dibuje antes de llegar abajo
-    const triggerPoint = window.scrollY + (window.innerHeight * 0.85);
+    const triggerPoint = window.scrollY + (window.innerHeight * 0.5);
 
     timelineSegments.forEach(segment => {
         const totalDist = segment.absEndY - segment.absStartY;
@@ -436,8 +437,8 @@ function loopAnimation() {
 function renderEducation(edu) {
     const container = document.getElementById('education-grid');
     container.innerHTML = edu.map((item, index) => `
-        <div class="glow-card p-6 rounded-2xl relative group hover:-translate-y-2 transition-transform" data-aos="zoom-in" data-aos-delay="${index * 100}">
-            <div class="absolute top-4 right-4 text-[var(--accent-color)] opacity-50"><i class="fas fa-graduation-cap text-2xl"></i></div>
+        <div class="glow-card p-6 rounded-2xl overflow-hidden relative group hover:-translate-y-2 transition-transform" data-aos="zoom-in" data-aos-delay="${index * 100}">
+            <div class="absolute top-0 right-0 text-[var(--accent-color)] opacity-10 rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-6xl"></i></div>
             <h3 class="font-heading font-bold text-lg mb-1 text-[var(--text-primary)]">${item.degree}</h3>
             <p class="text-sm text-[var(--text-secondary)] mb-2">${item.school}</p>
             <span class="text-xs font-mono text-[var(--accent-color)] bg-[var(--bg-primary)] border border-[var(--border-color)] px-2 py-1 rounded">${item.year}</span>

@@ -94,7 +94,7 @@ body {
     display: inline-flex;
     overflow: hidden;
     border-radius: 0.75rem; /* rounded-xl */
-    padding: 1px; /* El grosor del borde animado */
+    padding: 3px; /* El grosor del borde animado */
 }
 
 .magic-btn-border {
@@ -115,8 +115,8 @@ body {
     justify-content: center;
     border-radius: 0.75rem; /* rounded-xl */
     background-color: var(--btn-bg); /* Fondo sólido */
-    padding-left: 2.5rem; /* px-10 */
-    padding-right: 2.5rem;
+    padding-left: 2rem; /* px-10 */
+    padding-right: 2rem;
     padding-top: 1rem; /* py-4 */
     padding-bottom: 1rem;
     font-size: 0.875rem; /* text-sm */
