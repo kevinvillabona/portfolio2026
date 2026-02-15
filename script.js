@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initSmoothScroll(); // Inicializamos el scroll suave
+    
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
@@ -9,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
             renderExperience(data.experience);
             renderEducation(data.education);
             renderFooter(data.profile);
+            
+            // ACTUALIZAR LINK DEL CV EN NAVBAR
+            const navCvBtn = document.getElementById('nav-cv-btn');
+            if (navCvBtn && data.profile.cv_file) {
+                navCvBtn.href = data.profile.cv_file;
+            }
             
             // Inicializar animaciones DESPUÉS de renderizar el contenido
             AOS.init({
@@ -20,6 +28,30 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error cargando datos:', error));
 });
+
+// FUNCIÓN PARA SCROLL SUAVE PERSONALIZADO
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                // Calcular posición restando el header fijo (aprox 100px)
+                const headerOffset = 100;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+}
 
 function initTheme() {
     const themeToggleBtn = document.getElementById('theme-toggle');
@@ -72,9 +104,9 @@ function renderHero(profile) {
                 </span>
             </a>
             
-            <a href="${profile.cv_file}" download class="group px-8 py-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:bg-[var(--bg-primary)] transition flex items-center gap-2 text-sm font-medium">
+            <!-- <a href="${profile.cv_file}" download class="group px-8 py-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:bg-[var(--bg-primary)] transition flex items-center gap-2 text-sm font-medium">
                 Descargar CV <i class="fas fa-download group-hover:translate-y-1 transition-transform text-[var(--accent-color)]"></i>
-            </a>
+            </a> -->
         </div>
     `;
 }

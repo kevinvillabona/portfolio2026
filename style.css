@@ -113,7 +113,8 @@ body {
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    border-radius: 0.75rem; /* rounded-xl */
+    /*border-radius: 0.75rem;  rounded-xl */
+    border-radius: 0.6rem;
     background-color: var(--btn-bg); /* Fondo sólido */
     padding-left: 2rem; /* px-10 */
     padding-right: 2rem;
@@ -234,8 +235,6 @@ body {
     50% { stop-color: var(--accent-color); }
     100% { stop-color: #E2CBFF; }
 }
-
-
 
 /* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 8px; }
