@@ -254,7 +254,7 @@ function renderExperience(experience) {
                 ${isRightAligned ? 'md:ml-auto' : 'md:mr-auto'}" 
                 data-aos="${fadeDir}" data-aos-delay="100">
                 
-                <div class="glow-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-xl group hover:border-[var(--accent-color)] transition-all duration-300">
+                <div class="glow-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] group hover:border-[var(--accent-color)] transition-all duration-300">
                     <div class="flex flex-row items-start sm:items-center gap-5 mb-8 border-b border-[var(--border-color)] pb-6">
                         <div class="w-16 h-16 bg-[var(--bg-primary)] rounded-2xl p-3 border border-[var(--border-color)] flex items-center justify-center shrink-0 shadow-sm">
                             <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain" 
