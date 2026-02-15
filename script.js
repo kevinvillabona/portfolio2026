@@ -103,10 +103,6 @@ function renderHero(profile) {
                     Ver Proyectos <i class="fas fa-code group-hover:translate-x-1 transition-transform"></i>
                 </span>
             </a>
-            
-            <!-- <a href="${profile.cv_file}" download class="group px-8 py-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-[var(--text-primary)] hover:bg-[var(--bg-primary)] transition flex items-center gap-2 text-sm font-medium">
-                Descargar CV <i class="fas fa-download group-hover:translate-y-1 transition-transform text-[var(--accent-color)]"></i>
-            </a> -->
         </div>
     `;
 }
@@ -172,26 +168,40 @@ function renderBento(data) {
 function renderProjects(projects) {
     const container = document.getElementById('projects-grid');
     container.innerHTML = projects.map((proj, index) => {
+        
         const tagsHTML = proj.tags.map(tag => 
-            `<div class="w-8 h-8 rounded-full border border-[var(--border-color)] bg-[var(--bg-primary)] text-[var(--text-secondary)] flex items-center justify-center text-[10px] font-bold" title="${tag}">${tag}</div>`
+            `<span class="px-3 py-1 text-xs font-medium rounded-full bg-[var(--bg-primary)]/90 backdrop-blur-md border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap shadow-sm">${tag}</span>`
         ).join('');
-        // Staggered delay logic: index * 100ms
+
+        const isGithub = proj.link.toLowerCase().includes("github");
+        const btnText = isGithub ? "Ver Repositorio" : "Ver Sitio";
+        const btnIcon = isGithub ? "fab fa-github" : "fas fa-arrow-right";
+
         return `
-        <div class="flex flex-col items-center justify-center w-full" data-aos="fade-up" data-aos-delay="${index * 150}">
-            <div class="w-full h-[300px] md:h-[400px] bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] overflow-hidden relative mb-6 group">
-                 <div class="w-full h-full p-6 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute bottom-0 left-0 right-0 h-[90%] w-[90%] mx-auto bg-[var(--bg-primary)] rounded-t-xl border-t border-l border-r border-[var(--border-color)] overflow-hidden transition-transform duration-500 group-hover:translate-y-2 group-hover:scale-[1.02]">
-                        <img src="${proj.image}" onerror="this.src='https://via.placeholder.com/800x600/ccc/333?text=${encodeURIComponent(proj.title)}'" alt="${proj.title}" class="w-full h-full object-cover object-top">
-                    </div>
-                 </div>
+        <div class="glow-card rounded-3xl relative overflow-hidden h-[400px] flex flex-col justify-end p-6 md:p-8 group" data-aos="fade-up" data-aos-delay="${index * 150}">
+            
+            <div class="absolute inset-0 z-0">
+                 <img src="${proj.image}" 
+                      onerror="this.src='https://via.placeholder.com/800x600/ccc/333?text=${encodeURIComponent(proj.title)}'" 
+                      alt="${proj.title}" 
+                      class="w-full h-full object-cover opacity-30 dark:opacity-40 transform transition-all duration-700 group-hover:scale-105 group-hover:opacity-90">
+                 
+                 <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-[var(--bg-card)]/90 to-transparent transition-opacity duration-500"></div>
             </div>
-            <h3 class="font-heading font-bold text-2xl md:text-3xl line-clamp-1 mb-2 text-[var(--text-primary)]">${proj.title}</h3>
-            <p class="text-[var(--text-secondary)] line-clamp-2 text-sm md:text-base mb-4 font-light text-center px-4">${proj.desc}</p>
-            <div class="flex items-center justify-between w-full mt-2 px-2">
-                <div class="flex items-center -space-x-2">${tagsHTML}</div>
-                <a href="${proj.link}" target="_blank" class="flex items-center text-[var(--accent-color)] text-sm md:text-base font-medium hover:underline">
-                    Ver Proyecto <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                </a>
+
+            <div class="relative z-10 flex flex-col h-full justify-end">
+                
+                <h3 class="font-heading font-bold text-2xl md:text-3xl line-clamp-1 mb-2 text-[var(--text-primary)] drop-shadow-sm">${proj.title}</h3>
+                <p class="text-[var(--text-secondary)] line-clamp-2 text-sm md:text-base mb-6 font-light drop-shadow-sm">${proj.desc}</p>
+                
+                <div class="flex flex-row items-center justify-between gap-4 mt-2">
+                    <div class="flex flex-wrap gap-2">${tagsHTML}</div>
+                    
+                    <a href="${proj.link}" target="_blank" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm md:text-base font-medium group/btn hover:brightness-110 transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-4 py-2 rounded-full border border-[var(--border-color)]">
+                        ${btnText} 
+                        <i class="${btnIcon} transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                    </a>
+                </div>
             </div>
         </div>
         `;
@@ -250,7 +260,7 @@ function renderExperience(experience) {
                  <div class="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-[var(--text-primary)]"></div>
             </div>
 
-            <div id="card-${index}" class="w-full pl-8 md:pl-0 md:w-[85%] 
+            <div id="card-${index}" class="w-full pl-8 md:pl-0 md:w-[92%] 
                 ${isRightAligned ? 'md:ml-auto' : 'md:mr-auto'}" 
                 data-aos="${fadeDir}" data-aos-delay="100">
                 
