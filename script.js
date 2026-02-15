@@ -166,60 +166,68 @@ function renderProjects(projects) {
     }).join('');
 }
 
-let resizeTimeout;
+let timelineSegments = [];
+let animationFrameId;
 
 function renderExperience(experience) {
     const container = document.getElementById('experience-grid');
     
-    // Contenedor principal
-    container.className = "timeline-container max-w-6xl mx-auto px-4 sm:px-6 pb-20";
+    // Limpieza
+    if (animationFrameId) cancelAnimationFrame(animationFrameId);
     
-    // Inyectamos el lienzo SVG (Oculto en móvil por CSS)
+    // Configuración inicial
+    container.className = "timeline-container max-w-6xl mx-auto px-4 sm:px-6 pb-20";
     container.innerHTML = `<svg id="timeline-canvas" class="timeline-svg"></svg>`;
 
     const content = experience.map((company, index) => {
-        // Lógica Desktop:
-        // Index Par (0, 2...) -> Tarjeta a la DERECHA (Espacio línea a la Izq)
-        // Index Impar (1, 3...) -> Tarjeta a la IZQUIERDA (Espacio línea a la Der)
-        // NOTA: Esto es inverso a tu código anterior para cumplir con tu pedido visual
         const isRightAligned = index % 2 === 0; 
-        
-        // En móvil siempre fade-up o right. En desktop alternamos.
         const fadeDir = isRightAligned ? "fade-left" : "fade-right";
 
-        const rolesHTML = company.roles.map(role => `
+        const rolesHTML = company.roles.map(role => {
+        const isPresent = role.date.toLowerCase().includes("presente");
+
+        return `
             <div class="relative pl-6 border-l-2 border-[var(--border-color)] hover:border-[var(--accent-color)] transition-colors duration-300 mb-6 last:mb-0 group/role">
-                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[var(--bg-primary)] border-2 border-[var(--border-color)] group-hover/role:border-[var(--accent-color)] transition-colors"></div>
+                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full 
+                    ${isPresent ? 'bg-[var(--accent-color)]' : 'bg-[var(--bg-primary)]'}
+                    border-2 border-[var(--border-color)] 
+                    group-hover/role:border-[var(--accent-color)] 
+                    transition-colors">
+                </div>
                 <h4 class="text-lg font-bold text-[var(--text-primary)]">${role.title}</h4>
-                <p class="text-xs font-mono text-[var(--accent-color)] mb-2 uppercase tracking-wide">${role.date}</p>
+                <p class="text-xs font-mono
+                    ${isPresent ? 'text-[var(--accent-color)]' : 'text-[var(--text-secondary)]'} 
+                    mb-2 uppercase tracking-wide">${role.date}
+                </p>
                 <ul class="list-disc list-outside ml-4 text-sm text-[var(--text-secondary)] space-y-1">
                     ${role.tasks.map(task => `<li>${task}</li>`).join('')}
                 </ul>
             </div>
-        `).join('');
+        `;
+    }).join('');
+
 
         return `
-        <div class="timeline-card-wrapper relative w-full mb-16 md:mb-32 last:mb-0">
-            
-            <div class="mobile-line-gradient md:hidden"></div>
+        <div class="timeline-card-wrapper relative w-full mb-24 md:mb-40 last:mb-0">
+            <div id="mobile-line-${index}" class="mobile-line-gradient md:hidden"></div>
 
-            <div id="dot-${index}" class="absolute top-0 w-6 h-6 rounded-full bg-[var(--bg-card)] border-[3px] border-[var(--accent-color)] shadow-[0_0_15px_rgba(var(--accent-color),0.8)] z-20
-                /* Posición Móvil */
-                left-[-10px]
-                /* Posición Desktop */
+            <div id="dot-${index}" class="timeline-dot absolute top-0 w-7 h-7 rounded-full bg-[var(--bg-card)] border-[3px] border-[var(--accent-color)] shadow-[0_0_20px_rgba(var(--accent-color),0.6)] z-20
+                left-[-11px]
                 ${isRightAligned ? 'md:left-0' : 'md:left-auto md:right-0'}
             ">
-                 <div class="absolute inset-0 m-auto w-2 h-2 rounded-full bg-[var(--text-primary)]"></div>
+                 <div class="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-[var(--text-primary)]"></div>
             </div>
 
-            <div id="card-${index}" class="w-full pl-8 md:pl-0 md:w-[95%] 
+            <div id="card-${index}" class="w-full pl-8 md:pl-0 md:w-[85%] 
                 ${isRightAligned ? 'md:ml-auto' : 'md:mr-auto'}" 
                 data-aos="${fadeDir}" data-aos-delay="100">
                 
                 <div class="glow-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] shadow-xl group hover:border-[var(--accent-color)] transition-all duration-300">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-8 border-b border-[var(--border-color)] pb-6">
                         <div class="w-16 h-16 bg-[var(--bg-primary)] rounded-2xl p-3 border border-[var(--border-color)] flex items-center justify-center shrink-0 shadow-sm">
-                            <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain" onerror="this.style.display='none';">
+                            <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain" 
+                                 onload="initTimelineLines(${experience.length})"
+                                 onerror="this.style.display='none';">
                         </div>
                         <div>
                             <h3 class="font-heading text-2xl font-bold text-[var(--text-primary)] mb-1">${company.company}</h3>
@@ -244,127 +252,185 @@ function renderExperience(experience) {
         container.appendChild(wrapper.firstChild);
     }
 
-    // Dibujar líneas SVG (Solo funcionará en desktop)
-    setTimeout(() => drawTimelineLines(experience.length), 300);
-    
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => drawTimelineLines(experience.length), 100);
-    });
+    // Inicializar todo
+    setTimeout(() => initTimelineLines(experience.length), 300);
+
+    // Observer para Resize
+    new ResizeObserver(() => {
+        initTimelineLines(experience.length);
+    }).observe(container);
 }
 
-function drawTimelineLines(count) {
+function initTimelineLines(count) {
     const svg = document.getElementById('timeline-canvas');
     const container = document.getElementById('experience-grid');
     if (!svg || !container) return;
 
-    // DETECCIÓN RESPONSIVE: Si es móvil, limpiar SVG y salir
-    if (window.innerWidth < 768) {
-        svg.innerHTML = '';
-        return; 
-    }
-
-    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
-    svg.innerHTML = ''; 
-
-    // Definir Gradiente
-    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
-    defs.innerHTML = `
-        <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#E2CBFF">
-                <animate attributeName="stop-color" values="#E2CBFF; ${accentColor}; #E2CBFF" dur="3s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="50%" stop-color="${accentColor}">
-                <animate attributeName="stop-color" values="${accentColor}; #E2CBFF; ${accentColor}" dur="3s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="100%" stop-color="#E2CBFF">
-                <animate attributeName="stop-color" values="#E2CBFF; ${accentColor}; #E2CBFF" dur="3s" repeatCount="indefinite" />
-            </stop>
-        </linearGradient>
-        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-    `;
-    svg.appendChild(defs);
-
-    const containerRect = container.getBoundingClientRect();
-    const cornerRadius = 40; // Radio más amplio para que se vea elegante
-
-    for (let i = 0; i < count - 1; i++) {
-        const dot1 = document.getElementById(`dot-${i}`);
-        const card1 = document.getElementById(`card-${i}`); 
-        const dot2 = document.getElementById(`dot-${i+1}`);
-
-        if (dot1 && dot2 && card1) {
-            const r1 = dot1.getBoundingClientRect();
-            const rCard1 = card1.getBoundingClientRect(); 
-            const r2 = dot2.getBoundingClientRect();
-
-            const x1 = r1.left + r1.width / 2 - containerRect.left;
-            const y1 = r1.top + r1.height / 2 - containerRect.top;
-            
-            const x2 = r2.left + r2.width / 2 - containerRect.left;
-            const y2 = r2.top + r2.height / 2 - containerRect.top;
-
-            // Punto de giro: Final de la tarjeta + 50px de espacio
-            const turnY = (rCard1.bottom - containerRect.top) + 50; 
-
-            // Dibujo Ortogonal (Tubería)
-            let d = `M ${x1} ${y1}`; 
-            d += ` L ${x1} ${turnY - cornerRadius}`;
-            
-            const direction = x2 > x1 ? 1 : -1; // 1 = Derecha, -1 = Izquierda
-            
-            // Primera curva (90 grados)
-            d += ` Q ${x1} ${turnY} ${x1 + (cornerRadius * direction)} ${turnY}`;
-            
-            // Línea horizontal cruzando la pantalla
-            d += ` L ${x2 - (cornerRadius * direction)} ${turnY}`;
-            
-            // Segunda curva (90 grados hacia abajo)
-            d += ` Q ${x2} ${turnY} ${x2} ${turnY + cornerRadius}`;
-            
-            // Línea final hacia el siguiente punto
-            d += ` L ${x2} ${y2}`;
-
-            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            path.setAttribute("d", d);
-            path.setAttribute("stroke", "url(#snakeGradient)");
-            path.setAttribute("stroke-width", "4");
-            path.setAttribute("fill", "none");
-            path.setAttribute("stroke-linecap", "round");
-            path.setAttribute("filter", "url(#glow)");
-
-            svg.appendChild(path);
-        }
-    }
+    // 1. LIMPIAR Y PREPARAR DATOS
+    timelineSegments = [];
     
-    // Línea de desvanecimiento final (Desktop)
-    const lastDot = document.getElementById(`dot-${count - 1}`);
-    const lastCard = document.getElementById(`card-${count - 1}`);
-    if (lastDot && lastCard) {
-        const rLast = lastDot.getBoundingClientRect();
-        const rLastCard = lastCard.getBoundingClientRect();
-        const xLast = rLast.left + rLast.width / 2 - containerRect.left;
-        const yStart = rLast.top + rLast.height / 2 - containerRect.top;
-        const yEnd = (rLastCard.bottom - containerRect.top); 
+    // Altura absoluta del contenedor para cálculos
+    const containerTop = container.getBoundingClientRect().top + window.scrollY;
 
-        const fadePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        fadePath.setAttribute("d", `M ${xLast} ${yStart} L ${xLast} ${yEnd}`);
-        
-        const fadeId = "fadeGrad";
-        if(!document.getElementById(fadeId)) {
-             const g = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
-             g.id = fadeId; g.setAttribute("x1","0"); g.setAttribute("y1","0"); g.setAttribute("x2","0"); g.setAttribute("y2","1");
-             g.innerHTML = `<stop offset="0%" stop-color="${accentColor}"/><stop offset="100%" stop-color="${accentColor}" stop-opacity="0"/>`;
-             defs.appendChild(g);
+    // --- MODO DESKTOP (SVG) ---
+    if (window.innerWidth >= 768) {
+        const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+        svg.innerHTML = ''; 
+
+        // Definimos el gradiente
+        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        defs.innerHTML = `
+            <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#E2CBFF"><animate attributeName="stop-color" values="#E2CBFF; ${accentColor}; #E2CBFF" dur="3s" repeatCount="indefinite" /></stop>
+                <stop offset="50%" stop-color="${accentColor}"><animate attributeName="stop-color" values="${accentColor}; #E2CBFF; ${accentColor}" dur="3s" repeatCount="indefinite" /></stop>
+                <stop offset="100%" stop-color="#E2CBFF"><animate attributeName="stop-color" values="#E2CBFF; ${accentColor}; #E2CBFF" dur="3s" repeatCount="indefinite" /></stop>
+            </linearGradient>
+        `;
+        svg.appendChild(defs);
+
+        const containerRect = container.getBoundingClientRect();
+        const cornerRadius = 50; // Curvas más amplias
+
+        for (let i = 0; i < count - 1; i++) {
+            const dot1 = document.getElementById(`dot-${i}`);
+            const card1 = document.getElementById(`card-${i}`); 
+            const dot2 = document.getElementById(`dot-${i+1}`);
+
+            // Solo si la tarjeta tiene altura (está visible/cargada)
+            if (dot1 && dot2 && card1 && card1.offsetHeight > 0) {
+                const r1 = dot1.getBoundingClientRect();
+                const rCard1 = card1.getBoundingClientRect(); 
+                const r2 = dot2.getBoundingClientRect();
+
+                const x1 = r1.left + r1.width / 2 - containerRect.left;
+                const y1 = r1.top + r1.height / 2 - containerRect.top;
+                
+                const x2 = r2.left + r2.width / 2 - containerRect.left;
+                const y2 = r2.top + r2.height / 2 - containerRect.top;
+
+                // Bajamos hasta el final de la tarjeta + 60px
+                const turnY = (rCard1.bottom - containerRect.top) + 60; 
+
+                let d = `M ${x1} ${y1}`; 
+                d += ` L ${x1} ${turnY - cornerRadius}`;
+                const direction = x2 > x1 ? 1 : -1; 
+                d += ` Q ${x1} ${turnY} ${x1 + (cornerRadius * direction)} ${turnY}`;
+                d += ` L ${x2 - (cornerRadius * direction)} ${turnY}`;
+                d += ` Q ${x2} ${turnY} ${x2} ${turnY + cornerRadius}`;
+                d += ` L ${x2} ${y2}`;
+
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path.setAttribute("d", d);
+                path.setAttribute("stroke", "url(#snakeGradient)");
+                path.setAttribute("stroke-width", "5"); // Más grueso
+                path.setAttribute("fill", "none");
+                path.setAttribute("stroke-linecap", "round");
+                // path.setAttribute("filter", "url(#glow)");
+                
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length; // Oculto inicialmente
+                
+                svg.appendChild(path);
+
+                // Guardamos estado para animación fluida
+                timelineSegments.push({
+                    type: 'desktop',
+                    element: path,
+                    length: length,
+                    currentLength: 0, // Valor actual dibujado (para Lerp)
+                    targetLength: 0,  // Valor objetivo según scroll
+                    startDot: dot1,
+                    endDot: dot2,
+                    // Coordenadas absolutas de inicio y fin de este tramo
+                    absStartY: containerTop + y1,
+                    absEndY: containerTop + y2
+                });
+            }
         }
-        fadePath.setAttribute("stroke", `url(#${fadeId})`);
-        fadePath.setAttribute("stroke-width", "4");
-        fadePath.setAttribute("stroke-linecap", "round");
-        svg.appendChild(fadePath);
+    } 
+    // --- MODO MÓVIL ---
+    else {
+        for (let i = 0; i < count; i++) {
+            const line = document.getElementById(`mobile-line-${i}`);
+            const dot = document.getElementById(`dot-${i}`);
+            const card = document.getElementById(`card-${i}`);
+            
+            if (line && dot && card) {
+                const startY = dot.getBoundingClientRect().top + window.scrollY;
+                const endY = card.getBoundingClientRect().bottom + window.scrollY + 40; 
+                
+                timelineSegments.push({
+                    type: 'mobile',
+                    element: line,
+                    currentProgress: 0,
+                    targetProgress: 0,
+                    startDot: dot,
+                    absStartY: startY,
+                    absEndY: endY
+                });
+            }
+        }
     }
+
+    // Iniciar el bucle de animación si no existe
+    if (!animationFrameId) {
+        loopAnimation();
+    }
+}
+
+// Bucle de animación (60fps)
+function loopAnimation() {
+    // 1. Calcular el punto de trigger (dónde "escribe" el lápiz)
+    // Usamos el 80% de la altura de la ventana para que se dibuje antes de llegar abajo
+    const triggerPoint = window.scrollY + (window.innerHeight * 0.85);
+
+    timelineSegments.forEach(segment => {
+        const totalDist = segment.absEndY - segment.absStartY;
+        
+        // Calcular cuánto deberíamos haber pintado según el scroll
+        let scrollDist = triggerPoint - segment.absStartY;
+        
+        // Normalizar entre 0 y 1
+        let targetRatio = scrollDist / totalDist;
+        targetRatio = Math.max(0, Math.min(1, targetRatio));
+
+        // --- LÓGICA DE SUAVIZADO (LERP) ---
+        // Movemos el valor actual un 10% hacia el valor objetivo en cada frame
+        // Esto crea el efecto de fluido/inercia.
+        
+        if (segment.type === 'desktop') {
+            // Objetivo en pixeles de longitud SVG
+            segment.targetLength = targetRatio * segment.length;
+            
+            // Interpolación: Current se acerca a Target
+            segment.currentLength += (segment.targetLength - segment.currentLength) * 0.1;
+
+            // Aplicar al DOM
+            // strokeDashoffset funciona al revés: Length = Vacío, 0 = Lleno
+            segment.element.style.strokeDashoffset = segment.length - segment.currentLength;
+
+            // Activar puntos
+            // Usamos el valor suavizado (currentLength) para que el punto aparezca justo cuando llega la línea
+            const currentRatio = segment.currentLength / segment.length;
+            if (currentRatio > 0.01) segment.startDot.classList.add('visible');
+            if (currentRatio > 0.98) segment.endDot.classList.add('visible');
+        } 
+        else { // Mobile
+            segment.targetProgress = targetRatio;
+            segment.currentProgress += (segment.targetProgress - segment.currentProgress) * 0.1;
+            
+            segment.element.style.height = `${segment.currentProgress * 100}%`;
+            
+            if (segment.currentProgress > 0.01) segment.startDot.classList.add('visible');
+        }
+    });
+
+    // Asegurar primer punto visible
+    const firstDot = document.getElementById('dot-0');
+    if (firstDot && window.scrollY > 0) firstDot.classList.add('visible');
+
+    animationFrameId = requestAnimationFrame(loopAnimation);
 }
 
 function renderEducation(edu) {
