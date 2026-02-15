@@ -26,11 +26,16 @@
     --btn-bg: #000319;           /* Fondo del botón en modo oscuro (Igual al bg-primary) */
 }
 
-/* === BASE === */
+/* === BASE & CORRECCIÓN DE OVERFLOW === */
+html, body {
+    width: 100%;
+    overflow-x: hidden !important; /* FORZAR ocultar desbordamiento horizontal */
+    position: relative; /* Necesario para contener elementos absolutos */
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    overflow-x: hidden; /* Crucial para AOS animations */
     scroll-behavior: smooth;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
