@@ -14,16 +14,17 @@
 
 .dark {
     /* --- MODO OSCURO (Original) --- */
-    --bg-primary: #000319;       /* Black-100 */
-    --bg-card: #04071D;          /* Card Dark */
+    --bg-primary: #0b0d12;       /* Black-100 */
+    --bg-card: #161b22;          /* Card Dark */
     --text-primary: #E4ECFF;     /* White-100 */
     --text-secondary: #C1C2D5;   /* White-200 */
     --accent-color: #ff4757;     /* ROJO VIBRANTE (Original) */
     --border-color: rgba(255, 255, 255, 0.1);
     /* --grid-color: rgba(255, 255, 255, 0.15); Opacidad original */
     --grid-color: rgb(169 169 169 / 8%); /* Gris claro con opacidad reducida */
-    --nav-bg: rgba(0, 3, 25, 0.7);
-    --btn-bg: #000319;           /* Fondo del botón en modo oscuro (Igual al bg-primary) */
+    /* --nav-bg: rgba(0, 3, 25, 0.7); */
+    --nav-bg: rgba(11, 13, 18, 0.7);
+    --btn-bg: #0b0d12;           /* Fondo del botón en modo oscuro (Igual al bg-primary) */
 }
 
 /* === BASE & CORRECCIÓN DE OVERFLOW === */
@@ -84,13 +85,13 @@ body {
 }
 
 /* Gradiente sutil solo en dark mode */
-.dark .glow-card {
+/* .dark .glow-card {
     background: linear-gradient(90deg, #04071D 0%, #0c0e23 100%);
-}
-
-.glow-card:hover {
-    border-color: var(--accent-color); /* Solo cambia el borde */
-    /* SIN SOMBRA DIFUSA EXTERNA */
+} */
+ 
+.dark .glow-card {
+    /* Un gradiente sutil entre tu color de tarjeta y uno apenas más claro */
+    background: linear-gradient(90deg, #161b22 0%, #1d2229 100%);
 }
 
 /* === BOTÓN MÁGICO (RESTAURADO) === */

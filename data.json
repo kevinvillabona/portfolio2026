@@ -71,25 +71,25 @@
   ],
   "projects": [
     {
-      "title": "SINU - Armada Argentina",
-      "desc": "Sistema de Inscripción Unificado de alta disponibilidad. Mantenimiento evolutivo y soporte crítico.",
-      "tags": ["C#", ".NET", "SQL"],
-      "link": "https://sinu.incorporacion.armada.mil.ar/",
-      "image": "images/captura-sinu.png"
-    },
-    {
       "title": "Plataforma COAMAS",
-      "desc": "Gestión de documentación operativa para el Atlántico Sur. Desarrollo Full Stack con Entity Framework.",
+      "desc": "Gestión de documentación operativa y noticias para el Atlántico Sur. Desarrollo Full Stack con Entity Framework.",
       "tags": ["Core", "EF", "Sec"],
       "link": "https://www.coamas.org/",
       "image": "images/captura-coamas.png"
     },
     {
-      "title": "La Gándara E-commerce",
+      "title": "La Gándara",
       "desc": "Desarrollo web freelance enfocado en UX/UI y optimización SEO para maximizar conversión.",
       "tags": ["JS", "SEO", "UX"],
       "link": "https://lagandara.com.ar/",
       "image": "images/captura-lagandara.png"
+    },
+    {
+      "title": "SINU",
+      "desc": "Sistema de Inscripción Unificado de alta disponibilidad. Mantenimiento evolutivo y soporte crítico.",
+      "tags": ["C#", ".NET", "SQL"],
+      "link": "https://sinu.incorporacion.armada.mil.ar/",
+      "image": "images/captura-sinu.png"
     },
     {
       "title": "Project Tracker Automation",

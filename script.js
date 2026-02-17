@@ -110,7 +110,7 @@ function renderHero(profile) {
 function renderBento(data) {
     const grid = document.getElementById('bento-grid');
     const skillsHTML = data.skills_scroll.map(skill => 
-        `<span class="py-2 lg:py-3 px-3 text-xs lg:text-sm rounded-lg text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap">${skill}</span>`
+        `<span class="py-2 lg:py-3 px-3 text-xs lg:text-sm rounded text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap">${skill}</span>`
     ).join('');
 
     grid.innerHTML = `
@@ -170,11 +170,11 @@ function renderProjects(projects) {
     container.innerHTML = projects.map((proj, index) => {
         
         const tagsHTML = proj.tags.map(tag => 
-            `<span class="px-3 py-1 text-xs font-medium rounded-full bg-[var(--bg-primary)]/90 backdrop-blur-md border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap shadow-sm">${tag}</span>`
+            `<span class="px-3 py-1 text-xs font-medium rounded bg-[var(--bg-primary)]/90 backdrop-blur-md border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap shadow-sm">${tag}</span>`
         ).join('');
 
         const isGithub = proj.link.toLowerCase().includes("github");
-        const btnText = isGithub ? "Ver Repositorio" : "Ver Sitio";
+        const btnText = isGithub ? "Ver Repo" : "Ver Sitio";
         const btnIcon = isGithub ? "fab fa-github" : "fas fa-arrow-right";
 
         return `
@@ -195,9 +195,9 @@ function renderProjects(projects) {
                 <p class="text-[var(--text-secondary)] line-clamp-2 text-sm md:text-base mb-6 font-light drop-shadow-sm">${proj.desc}</p>
                 
                 <div class="flex flex-row items-center justify-between gap-4 mt-2">
-                    <div class="flex flex-wrap gap-2">${tagsHTML}</div>
+                    <div class="flex flex-wrap gap-1">${tagsHTML}</div>
                     
-                    <a href="${proj.link}" target="_blank" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm md:text-base font-medium group/btn hover:brightness-110 transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-4 py-2 rounded-full border border-[var(--border-color)]">
+                    <a href="${proj.link}" target="_blank" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm md:text-base font-medium group/btn hover:brightness-110 hover:border-[var(--accent-color)] transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-4 py-2 rounded-full border border-[var(--border-color)]">
                         ${btnText} 
                         <i class="${btnIcon} transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                     </a>
@@ -237,7 +237,7 @@ function renderExperience(experience) {
                     transition-colors">
                 </div>
                 <h4 class="text-lg font-bold text-[var(--text-primary)]">${role.title}</h4>
-                <p class="text-xs font-mono
+                <p class="text-xs
                     ${isPresent ? 'text-[var(--accent-color)]' : 'text-[var(--text-secondary)]'} 
                     mb-2 uppercase tracking-wide">${role.date}
                 </p>
@@ -483,7 +483,7 @@ function renderEducation(edu) {
             <div class="absolute top-0 right-0 text-[var(--accent-color)] opacity-10 rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-6xl"></i></div>
             <h3 class="font-heading font-bold text-lg mb-1 text-[var(--text-primary)]">${item.degree}</h3>
             <p class="text-sm text-[var(--text-secondary)] mb-2">${item.school}</p>
-            <span class="text-xs font-mono text-[var(--accent-color)] bg-[var(--bg-primary)] border border-[var(--border-color)] px-2 py-1 rounded">${item.year}</span>
+            <span class="text-xs text-[var(--accent-color)] bg-[var(--bg-primary)] border border-[var(--border-color)] px-2 py-1 rounded">${item.year}</span>
         </div>
     `).join('');
 }
