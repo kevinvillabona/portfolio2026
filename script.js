@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderBento(data);
             renderProjects(data.projects);
             renderExperience(data.experience);
-            renderEducation(data.education);
+            // renderEducation(data.education);
             renderFooter(data.profile);
             
             // ACTUALIZAR LINK DEL CV EN NAVBAR
@@ -109,58 +109,105 @@ function renderHero(profile) {
 
 function renderBento(data) {
     const grid = document.getElementById('bento-grid');
+    
+    // Preparamos los skills para el scroll
     const skillsHTML = data.skills_scroll.map(skill => 
-        `<span class="py-2 lg:py-3 px-3 text-xs lg:text-sm rounded text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap">${skill}</span>`
+        `<span class="py-2 px-3 text-xs font-mono rounded text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] transition-colors cursor-default">${skill}</span>`
     ).join('');
 
+    // Preparamos el HTML de Educación (Compacto)
+    const educationHTML = data.education.map(edu => `
+        <div class="flex items-start gap-3 mb-4 last:mb-0 group/edu">
+            <div class="mt-1 min-w-[30px] h-[30px] rounded-lg bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-color)] group-hover/edu:scale-110 transition-transform">
+                <i class="fas fa-graduation-cap text-xs"></i>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold text-[var(--text-primary)] leading-tight">${edu.degree}</h4>
+                <p class="text-xs text-[var(--text-secondary)] mt-0.5">${edu.school}</p>
+                <span class="text-[10px] text-[var(--accent-color)] mt-1 inline-block">${edu.year}</span>
+            </div>
+        </div>
+    `).join('');
+
     grid.innerHTML = `
-        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl min-h-[40vh] relative overflow-hidden flex flex-col justify-end p-8 group" data-aos="fade-right" data-aos-delay="100">
-            <div class="absolute inset-0">
-                 <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000" class="w-full h-full object-cover opacity-20 dark:opacity-40 group-hover:scale-105 transition-transform duration-500">
-                 <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] to-transparent"></div>
+        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between" data-aos="fade-right" data-aos-delay="100">
+            <div class="absolute top-0 right-0 p-4 opacity-5">
+                <div class="absolute top-0 right-0 text-[var(--accent-color)] rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-8xl"></i></div>
             </div>
             <div class="relative z-10">
-                <div class="inline-block px-3 py-1 mb-2 text-xs font-bold tracking-wider text-[var(--accent-color)] uppercase bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full">Liderazgo</div>
-                <h3 class="font-heading font-bold text-xl md:text-2xl mb-2 text-[var(--text-primary)]">Arquitectura & Estrategia</h3>
-                <p class="text-sm text-[var(--text-secondary)]">Priorizo la escalabilidad, el código limpio y el liderazgo técnico efectivo.</p>
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-heading font-bold text-xl text-[var(--text-primary)]">
+                        Formación <span class="text-[var(--accent-color)]">Académica</span>
+                    </h3>
+                </div>
+                <div class="flex flex-col justify-center">
+                    ${educationHTML}
+                </div>
             </div>
         </div>
 
-        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl min-h-[40vh] relative overflow-hidden flex flex-col p-8 items-start justify-start" data-aos="fade-left" data-aos-delay="200">
-             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000" class="w-full h-full object-cover opacity-30 dark:opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                <div class="absolute inset-0 bg-gradient-to-b from-[var(--bg-card)]/50 to-[var(--bg-card)]"></div>
-             </div>
-             <div class="relative z-20">
-                <h3 class="font-heading font-bold text-xl md:text-2xl max-w-xs text-[var(--text-primary)]">Base en ${data.profile.location}</h3>
-                <p class="text-sm text-[var(--text-secondary)] mt-2">Disponible para proyectos globales.</p>
-             </div>
-             <div class="relative z-20 mt-auto ml-auto">
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-color)] opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-[var(--accent-color)]"></span>
-                </span>
-             </div>
-        </div>
-
-        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 h-full justify-center" data-aos="fade-up" data-aos-delay="300">
-            <p class="text-[var(--text-secondary)] text-sm mb-2 uppercase tracking-wider font-semibold">Tech Stack</p>
-            <h3 class="font-heading font-bold text-2xl mb-6 text-[var(--text-primary)]">Mis Herramientas</h3>
-            <div class="flex gap-2 lg:gap-3 w-fit absolute -right-3 lg:-right-2 h-full overflow-hidden mask-gradient-hero">
+        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 h-full justify-center min-h-[300px]" data-aos="fade-left" data-aos-delay="200">
+            <div class="absolute inset-0 bg-grid-pattern opacity-50"></div>
+            <div class="relative z-10">
+                <p class="text-[var(--text-secondary)] text-xs mb-2 uppercase tracking-wider font-semibold">Habilidades Técnicas</p>
+                <h3 class="font-heading font-bold text-lg mb-6 text-[var(--text-primary)]">Stack Principal</h3>
+            </div>
+            <div class="flex gap-3 w-fit absolute right-4 h-[120%] -top-[10%] overflow-hidden mask-gradient-hero py-4">
                 <div class="flex flex-col gap-3 animate-scroll-vertical">${skillsHTML}${skillsHTML}</div>
                 <div class="flex flex-col gap-3 animate-scroll-vertical" style="animation-delay: -5s;">${skillsHTML}${skillsHTML}</div>
             </div>
         </div>
 
-        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl relative overflow-hidden flex flex-col items-center justify-center p-8 min-h-[30vh]" data-aos="zoom-in" data-aos-delay="400">
-             <div class="font-mono text-[10px] absolute inset-0 text-[var(--text-secondary)] opacity-10 p-4 leading-relaxed overflow-hidden select-none">
-                  import pandas as pd<br>model = Sequential()<br>model.compile(optimizer='adam')<br>loss='mse'
+        <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 min-h-[200px]" data-aos="fade-up" data-aos-delay="300">
+             <div class="font-mono text-[10px] absolute inset-0 text-[var(--text-secondary)] opacity-10 p-4 leading-relaxed overflow-hidden select-none z-0">
+                  import pandas as pd<br>df = pd.read_csv('data.csv')<br>model.fit(X_train, y_train)<br># Future Loading...
              </div>
-             <div class="relative z-10 text-center">
-                <p class="text-[var(--text-secondary)] text-sm mb-2 font-semibold">Estado Actual</p>
-                <h3 class="font-heading font-bold text-2xl md:text-3xl text-[var(--accent-color)]">${data.status.current}</h3>
-                <p class="text-sm mt-2 text-[var(--text-secondary)]">${data.status.description}</p>
+             <div class="relative z-10 flex flex-col h-full">
+                <div>
+                    <div class="inline-block px-2 py-1 mb-2 text-[10px] font-bold tracking-wider text-[var(--accent-color)] uppercase bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full">
+                        <i class="fas fa-circle text-[6px] mr-1 animate-pulse"></i> Activo
+                    </div>
+                    <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">${data.status.current}</h3>
+                </div>
+                <div class="mt-4">
+                    <p class="text-xs text-[var(--text-secondary)] mb-3">${data.status.description}</p>
+                    <a href="${data.profile.github}" target="_blank" class="text-xs font-medium text-[var(--text-primary)] hover:text-[var(--accent-color)] flex items-center gap-1 transition-colors">
+                        Ver actividad en GitHub <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
              </div>
+        </div>
+
+        <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl relative overflow-hidden group cursor-pointer" onclick="document.getElementById('nav-cv-btn').click()" data-aos="zoom-in" data-aos-delay="400">
+            
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" 
+                     alt="Clean Code" 
+                     class="w-full h-full object-cover opacity-20 dark:opacity-10 group-hover:scale-110 group-hover:opacity-30 transition-all duration-700 ease-out">
+                
+                <div class="absolute inset-0 bg-gradient-to-r from-[var(--bg-card)] via-[var(--bg-card)]/90 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start items-center justify-between gap-6 h-full">
+                
+                <div class="max-w-lg w-full">
+                    <h3 class="font-heading font-bold text-lg text-[var(--text-primary)]">Arquitectura y Estrategia</h3>
+                    
+                    <p class="text-xs text-[var(--text-secondary)] mb-3 mt-4">Priorizo la escalabilidad, el código limpio y el liderazgo técnico efectivo.</p>
+                </div>
+
+                <div class="flex-shrink-0 flex flex-col items-center justify-center">
+                    <div class="w-14 h-14 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-primary)] group-hover:bg-[var(--accent-color)] group-hover:text-white group-hover:border-[var(--accent-color)] group-hover:scale-110 shadow-[0_0_20px_rgba(0,0,0,0.05)] transition-all duration-300">
+                        <i class="fas fa-download text-xl"></i>
+                    </div>
+                    <p class="text-[10px] text-center mt-2 font-bold uppercase tracking-widest text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-all duration-300">
+                        Descargar CV
+                    </p>
+                </div>
+
+            </div>
+            
+            <div class="absolute inset-0 border-2 border-transparent group-hover:border-[var(--accent-color)]/30 rounded-3xl transition-colors pointer-events-none"></div>
         </div>
     `;
 }
@@ -229,7 +276,7 @@ function renderExperience(experience) {
         const isPresent = role.date.toLowerCase().includes("presente");
 
         return `
-            <div class="relative pl-6 border-l-2 border-[var(--border-color)] hover:border-[var(--accent-color)] transition-colors duration-300 mb-6 last:mb-0 group/role">
+            <div class="relative pl-6 border-l-2 border-[var(--border-color)] transition-colors duration-300 mb-6 last:mb-0 group/role">
                 <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full 
                     ${isPresent ? 'bg-[var(--accent-color)]' : 'bg-[var(--bg-primary)]'}
                     border-2 border-[var(--border-color)] 
@@ -264,10 +311,10 @@ function renderExperience(experience) {
                 ${isRightAligned ? 'md:ml-auto' : 'md:mr-auto'}" 
                 data-aos="${fadeDir}" data-aos-delay="100">
                 
-                <div class="glow-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] group hover:border-[var(--accent-color)] transition-all duration-300">
-                    <div class="flex flex-row items-start sm:items-center gap-5 mb-8 border-b border-[var(--border-color)] pb-6">
-                        <div class="w-16 h-16 bg-[var(--bg-primary)] rounded-2xl p-3 border border-[var(--border-color)] flex items-center justify-center shrink-0 shadow-sm">
-                            <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain" 
+                <div class="glow-card p-6 md:p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] group transition-all duration-300">
+                    <div class="flex flex-row items-start sm:items-center gap-4 mb-8 border-b border-[var(--border-color)] pb-6">
+                        <div class="w-16 h-16 bg-[var(--bg-primary)] rounded-full p-1 border border-[var(--border-color)] flex items-center justify-center shrink-0 shadow-sm">
+                            <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain rounded-full" 
                                  onload="initTimelineLines(${experience.length})"
                                  onerror="this.style.display='none';">
                         </div>
@@ -476,17 +523,17 @@ function loopAnimation() {
     animationFrameId = requestAnimationFrame(loopAnimation);
 }
 
-function renderEducation(edu) {
-    const container = document.getElementById('education-grid');
-    container.innerHTML = edu.map((item, index) => `
-        <div class="glow-card p-6 rounded-2xl overflow-hidden relative group hover:-translate-y-2 transition-transform" data-aos="zoom-in" data-aos-delay="${index * 100}">
-            <div class="absolute top-0 right-0 text-[var(--accent-color)] opacity-10 rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-6xl"></i></div>
-            <h3 class="font-heading font-bold text-lg mb-1 text-[var(--text-primary)]">${item.degree}</h3>
-            <p class="text-sm text-[var(--text-secondary)] mb-2">${item.school}</p>
-            <span class="text-xs text-[var(--accent-color)] bg-[var(--bg-primary)] border border-[var(--border-color)] px-2 py-1 rounded">${item.year}</span>
-        </div>
-    `).join('');
-}
+// function renderEducation(edu) {
+//     const container = document.getElementById('education-grid');
+//     container.innerHTML = edu.map((item, index) => `
+//         <div class="glow-card p-6 rounded-2xl overflow-hidden relative group hover:-translate-y-2 transition-transform" data-aos="zoom-in" data-aos-delay="${index * 100}">
+//             <div class="absolute top-0 right-0 text-[var(--accent-color)] opacity-10 rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-6xl"></i></div>
+//             <h3 class="font-heading font-bold text-lg mb-1 text-[var(--text-primary)]">${item.degree}</h3>
+//             <p class="text-sm text-[var(--text-secondary)] mb-2">${item.school}</p>
+//             <span class="text-xs text-[var(--accent-color)] bg-[var(--bg-primary)] border border-[var(--border-color)] px-2 py-1 rounded">${item.year}</span>
+//         </div>
+//     `).join('');
+// }
 
 function renderFooter(profile) {
     const year = new Date().getFullYear();
