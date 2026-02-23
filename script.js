@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initSmoothScroll(); // Inicializamos el scroll suave
+    initMobileMenu();   // Inicializamos el menú móvil
     
     fetch('data.json')
         .then(response => response.json())
@@ -9,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderBento(data);
             renderProjects(data.projects);
             renderExperience(data.experience);
-            // renderEducation(data.education);
             renderFooter(data.profile);
             
             // ACTUALIZAR LINK DEL CV EN NAVBAR
@@ -28,6 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error cargando datos:', error));
 });
+
+// FUNCIÓN PARA EL MENÚ HAMBURGUESA
+function initMobileMenu() {
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (!mobileBtn || !mobileMenu) return;
+
+    function toggleMenu() {
+        mobileBtn.classList.toggle('hamburger-active');
+        mobileMenu.classList.toggle('mobile-menu-open');
+        document.body.classList.toggle('no-scroll');
+    }
+
+    mobileBtn.addEventListener('click', toggleMenu);
+
+    // Cerrar el menú automáticamente al hacer clic en un enlace
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('mobile-menu-open')) {
+                toggleMenu();
+            }
+        });
+    });
+}
 
 // FUNCIÓN PARA SCROLL SUAVE PERSONALIZADO
 function initSmoothScroll() {
@@ -110,8 +136,8 @@ function renderHero(profile) {
             ${profile.title}
         </p>
         <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-tight text-[var(--text-primary)]" data-aos="fade-up" data-aos-delay="300">
-            Transformando Ideas en<br>
-            <span class="text-[var(--accent-color)]">Experiencias Digitales</span>
+            ${profile.name}<br>
+            <span class="text-[var(--accent-color)]">${profile.surname}</span>
         </h1>
         <p class="text-[var(--text-secondary)] md:tracking-wider mb-10 text-sm md:text-lg lg:text-xl max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="400">
             ${profile.summary}
@@ -543,21 +569,9 @@ function loopAnimation() {
     animationFrameId = requestAnimationFrame(loopAnimation);
 }
 
-// function renderEducation(edu) {
-//     const container = document.getElementById('education-grid');
-//     container.innerHTML = edu.map((item, index) => `
-//         <div class="glow-card p-6 rounded-2xl overflow-hidden relative group hover:-translate-y-2 transition-transform" data-aos="zoom-in" data-aos-delay="${index * 100}">
-//             <div class="absolute top-0 right-0 text-[var(--accent-color)] opacity-10 rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-6xl"></i></div>
-//             <h3 class="font-heading font-bold text-lg mb-1 text-[var(--text-primary)]">${item.degree}</h3>
-//             <p class="text-sm text-[var(--text-secondary)] mb-2">${item.school}</p>
-//             <span class="text-xs text-[var(--accent-color)] bg-[var(--bg-primary)] border border-[var(--border-color)] px-2 py-1 rounded">${item.year}</span>
-//         </div>
-//     `).join('');
-// }
-
 function renderFooter(profile) {
     const year = new Date().getFullYear();
-    document.getElementById('copyright').innerText = `Copyright © ${year} ${profile.name}`;
+    document.getElementById('copyright').innerText = `Copyright © ${year} ${profile.name} ${profile.surname}. Todos los derechos reservados.`;
     document.getElementById('footer-email').href = `mailto:${profile.email}`;
     document.getElementById('social-linkedin').href = profile.linkedin;
     document.getElementById('social-github').href = profile.github;

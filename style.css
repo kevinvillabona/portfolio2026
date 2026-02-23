@@ -85,10 +85,6 @@ body {
 }
 
 /* Gradiente sutil solo en dark mode */
-/* .dark .glow-card {
-    background: linear-gradient(90deg, #04071D 0%, #0c0e23 100%);
-} */
- 
 .dark .glow-card {
     /* Un gradiente sutil entre tu color de tarjeta y uno apenas más claro */
     background: linear-gradient(90deg, #161b22 0%, #1d2229 100%);
@@ -119,7 +115,6 @@ body {
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    /*border-radius: 0.75rem;  rounded-xl */
     border-radius: 0.6rem;
     background-color: var(--btn-bg); /* Fondo sólido */
     padding-left: 2rem; /* px-10 */
@@ -247,3 +242,30 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 4px; opacity: 0.5; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+/* === MENU MÓVIL Y ANIMACIONES HAMBURGUESA === */
+/* Transformación a 'X' */
+.hamburger-active .line-1 {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--accent-color) !important;
+}
+.hamburger-active .line-2 {
+    opacity: 0;
+    transform: translateX(10px);
+}
+.hamburger-active .line-3 {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--accent-color) !important;
+}
+
+/* Mostrar menú móvil */
+.mobile-menu-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(0) !important;
+}
+
+/* Prevenir scroll del body cuando el menú está abierto */
+.no-scroll {
+    overflow: hidden !important;
+}
