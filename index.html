@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Kevin Villabona</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Portfolio | Kevin Villabona - Tech Lead & .NET Developer</title>
+    <meta name="description" content="Portfolio de Kevin Villabona, Líder Técnico y Desarrollador de software especializado en diseño de arquitecturas .NET, optimización de procesos y Ciencia de Datos. Argentina.">
+    <meta name="keywords" content="Kevin Villabona, Tech Lead, .NET Developer, C#, SQL Server, Data Science, Portfolio, Desarrollador de Software, Argentina, La Plata, Berisso, Arquitectura de Software">
+    <meta name="author" content="Kevin Villabona">
+    <meta name="theme-color" content="#cc0000">
 
+    <meta property="og:title" content="Portfolio | Kevin Villabona">
+    <meta property="og:description" content="Líder Técnico y Desarrollador de software especializado en diseño de arquitecturas .NET y optimización de procesos.">
+    <!-- <meta property="og:image" content="https://tudominio.com/images/og-image.jpg"> <meta property="og:url" content="https://tudominio.com"> -->
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
@@ -24,6 +32,7 @@
                     },
                     animation: {
                         'scroll-vertical': 'scroll-vertical 10s linear infinite',
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                          'scroll-vertical': {
@@ -40,9 +49,7 @@
 <body class="antialiased selection:bg-[#cc0000] dark:selection:bg-[#ff4757] selection:text-white overflow-x-hidden">
 
     <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-        
         <div class="w-full max-w-5xl flex justify-between items-center px-6 md:px-8 py-3 rounded-full border border-[var(--border-color)] bg-[var(--nav-bg)] backdrop-blur-lg shadow-lg dark:shadow-none shadow-[var(--border-color)]">
-            
             <a href="#" class="font-mono font-bold text-lg md:text-xl text-[var(--accent-color)] tracking-tighter hover:scale-110 transition-transform relative z-50">
                 &lt;kv/&gt;
             </a>
@@ -51,6 +58,7 @@
                 <a href="#about" class="nav-link hover:text-[var(--accent-color)] transition-colors">Perfil</a>
                 <a href="#experience" class="nav-link hover:text-[var(--accent-color)] transition-colors">Experiencia</a>
                 <a href="#projects" class="nav-link hover:text-[var(--accent-color)] transition-colors">Proyectos</a>
+                <a href="#sandbox" id="nav-sandbox" class="nav-link hover:text-[var(--accent-color)] transition-colors hidden">Sandbox</a>
                 <a href="#contact" class="nav-link hover:text-[var(--accent-color)] transition-colors">Contacto</a>
             </div>
 
@@ -70,12 +78,11 @@
                     <span class="line-3 w-5 h-0.5 bg-[var(--text-secondary)] group-hover:bg-[var(--accent-color)] transition-all duration-300 rounded-full origin-center"></span>
                 </button>
             </div>
-
         </div>
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 bg-[var(--bg-primary)]/95 backdrop-blur-md z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 lg:hidden translate-x-full">
-        <div class="flex flex-col items-center gap-8 text-2xl font-heading font-bold text-[var(--text-primary)]">
+        <div class="flex flex-col items-center gap-8 text-2xl font-heading font-bold text-[var(--text-primary)]" id="mobile-menu-links">
             <a href="#about" class="mobile-link hover:text-[var(--accent-color)] transition-colors hover:scale-110 transform duration-300">Perfil</a>
             <a href="#experience" class="mobile-link hover:text-[var(--accent-color)] transition-colors hover:scale-110 transform duration-300">Experiencia</a>
             <a href="#projects" class="mobile-link hover:text-[var(--accent-color)] transition-colors hover:scale-110 transform duration-300">Proyectos</a>
@@ -85,62 +92,109 @@
 
     <section class="relative min-h-screen w-full flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden" id="about">
         <div class="absolute inset-0 w-full h-full bg-grid-pattern mask-gradient-hero pointer-events-none"></div>
-        
         <div class="absolute inset-0 w-full h-full mask-gradient-hero pointer-events-none">
             <div class="grid-gleam top-[20%] left-[15%]" style="animation-delay: 0s;"></div>
             <div class="grid-gleam top-[35%] right-[25%]" style="animation-delay: 1.5s;"></div>
             <div class="grid-gleam top-[10%] right-[45%]" style="animation-delay: 0.5s;"></div>
             <div class="grid-gleam top-[50%] left-[35%]" style="animation-delay: 2.5s;"></div>
         </div>
-        
         <div class="absolute -top-40 left-0 md:left-60 md:-top-20 w-[50vh] h-[50vh] bg-[var(--text-secondary)] opacity-5 dark:opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
         <div class="absolute -top-10 right-0 w-[40vh] h-[80vh] bg-[var(--accent-color)] opacity-10 dark:opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
 
         <div id="hero-content" class="relative z-10 max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center text-center">
-            <div class="animate-pulse h-4 bg-gray-200 dark:bg-gray-800 w-32 rounded mb-4"></div>
+            <div class="w-32 h-32 md:w-40 md:h-40 bg-[var(--border-color)] rounded-3xl mb-6 animate-pulse-slow"></div>
+            <div class="w-48 h-4 bg-[var(--border-color)] rounded mb-6 animate-pulse-slow"></div>
+            <div class="w-3/4 h-12 bg-[var(--border-color)] rounded mb-4 animate-pulse-slow"></div>
+            <div class="w-full h-20 bg-[var(--border-color)] rounded mb-10 animate-pulse-slow"></div>
         </div>
     </section>
 
     <section class="max-w-7xl mx-auto px-5 md:px-10 pb-20 relative z-10">
-        <div id="bento-grid" class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-4 md:gap-8 mx-auto"></div>
+        <div id="bento-grid" class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-4 md:gap-8 mx-auto">
+            <div class="md:col-span-3 lg:col-span-3 h-64 bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+            <div class="md:col-span-3 lg:col-span-2 h-64 bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+            <div class="md:col-span-3 lg:col-span-2 h-48 bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+            <div class="md:col-span-3 lg:col-span-3 h-48 bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+        </div>
     </section>
 
     <section class="py-20 max-w-7xl mx-auto px-5 md:px-10" id="experience">
         <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]" data-aos="fade-up">
             Experiencia <span class="text-[var(--accent-color)]">Laboral</span>
         </h2>
-        <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+             <div class="w-full h-80 bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+             <div class="w-full h-80 bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+        </div>
     </section>
 
     <section class="py-20 max-w-7xl mx-auto px-5 md:px-10" id="projects">
-        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-16 text-[var(--text-primary)]" data-aos="fade-up">
-            Proyectos <span class="text-[var(--accent-color)]">Recientes</span>
+        <h2 class="font-heading text-3xl md:text-5xl font-bold text-center mb-8 text-[var(--text-primary)]" data-aos="fade-up">
+            Proyectos <span class="text-[var(--accent-color)]">Destacados</span>
         </h2>
-        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16"></div>
+        
+        <div id="projects-filter" class="flex flex-wrap justify-center gap-2 mb-12" data-aos="fade-up" data-aos-delay="100">
+            </div>
+
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
+            <div class="w-full h-[400px] bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+            <div class="w-full h-[400px] bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
+        </div>
+    </section>
+
+    <section class="py-20 max-w-7xl mx-auto px-5 md:px-10 hidden" id="sandbox">
+        <div class="flex items-center gap-4 justify-center mb-16" data-aos="fade-up">
+            <h2 class="font-heading text-3xl md:text-5xl font-bold text-center text-[var(--text-primary)]">
+                Laboratorio <span class="text-[var(--accent-color)]">& Sandbox</span>
+            </h2>
+            <i class="fas fa-flask text-2xl text-[var(--accent-color)] animate-bounce"></i>
+        </div>
+        <p class="text-center text-[var(--text-secondary)] max-w-2xl mx-auto mb-12 -mt-10" data-aos="fade-up" data-aos-delay="100">
+            Espacio dedicado a proyectos personales, exploración de nuevas tecnologías, conceptos de diseño y desarrollos creativos.
+        </p>
+        <div id="sandbox-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
+            </div>
     </section>
 
     <footer class="relative pt-20 pb-10 w-full overflow-hidden flex flex-col items-center" id="contact">
         <div class="absolute inset-0 w-full h-full bg-grid-pattern mask-gradient-footer pointer-events-none"></div>
         
-        <div class="relative z-10 flex flex-col items-center text-center px-4" data-aos="zoom-in-up" data-aos-delay="200">
-             <h2 class="font-heading text-3xl md:text-5xl lg:text-6xl font-bold max-w-4xl mb-6 text-[var(--text-primary)]">
-                ¿Listo para <span class="text-[var(--accent-color)]">impulsar tu proyecto</span>?
+        <div class="relative z-10 flex flex-col items-center px-4 w-full max-w-4xl" data-aos="zoom-in-up" data-aos-delay="200">
+             <h2 class="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center mb-6 text-[var(--text-primary)]">
+                ¿Listo para <span class="text-[var(--accent-color)]">colaborar</span>?
             </h2>
-            <p class="text-[var(--text-secondary)] mb-10">Contáctame hoy y hablemos de tecnología.</p>
+            <p class="text-[var(--text-secondary)] mb-10 text-center">Hablemos sobre tu próximo gran proyecto.</p>
 
-            <a id="footer-email" href="#" class="magic-btn-container mb-20 group">
-                <span class="magic-btn-border"></span>
-                <span class="magic-btn-content group-hover:text-[var(--accent-color)]">
-                    Enviar Correo <i class="fas fa-paper-plane"></i>
-                </span>
-            </a>
+            <form id="contact-form" action="https://formspree.io/f/tucodigo" method="POST" class="w-full form-container bg-[var(--bg-card)] border border-[var(--border-color)] p-6 md:p-8 rounded-3xl relative z-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Nombre</label>
+                        <input type="text" id="name" name="name" required class="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--accent-color)] transition-colors">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required class="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--accent-color)] transition-colors">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Mensaje</label>
+                    <textarea id="message" name="message" rows="4" required class="w-full bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-lg px-4 py-3 focus:outline-none focus:border-[var(--accent-color)] transition-colors resize-none"></textarea>
+                </div>
+                <div class="flex justify-center mt-8">
+                    <button type="submit" class="magic-btn-container group border-none bg-transparent w-full md:w-auto">
+                        <span class="magic-btn-border"></span>
+                        <span class="magic-btn-content group-hover:text-[var(--accent-color)] w-full justify-center">
+                            Enviar Mensaje <i class="fas fa-paper-plane ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
 
-            <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mt-10 text-[var(--text-secondary)] text-sm gap-4 px-10 border-[var(--border-color)] pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center w-full mt-20 text-[var(--text-secondary)] text-sm gap-4 pt-8">
                 <p id="copyright"></p>
                 <div class="flex gap-4">
                     <a id="social-linkedin" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all"><i class="fab fa-linkedin-in text-lg"></i></a>
                     <a id="social-github" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all"><i class="fab fa-github text-lg"></i></a>
-                    <a id="social-email" href="#" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all"><i class="fas fa-envelope text-lg"></i></a>
                 </div>
             </div>
         </div>

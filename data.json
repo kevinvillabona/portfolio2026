@@ -74,30 +74,40 @@
     {
       "title": "Plataforma COAMAS",
       "desc": "Gestión de documentación operativa y noticias para el Atlántico Sur. Desarrollo Full Stack con Entity Framework.",
-      "tags": ["Core", "EF", "Sec"],
+      "tags": ["ASP.NET", "Ef", "Bootstrap", "SQL Server"],
       "link": "https://www.coamas.org/",
       "image": "images/captura-coamas.png"
     },
     {
       "title": "La Gándara",
       "desc": "Desarrollo web freelance enfocado en UX/UI y optimización SEO para maximizar conversión.",
-      "tags": ["JS", "SEO", "UX"],
+      "tags": ["ASP.NET", "Bootstrap", "SEO", "UX/UI"],
       "link": "https://lagandara.com.ar/",
       "image": "images/captura-lagandara.png"
     },
     {
       "title": "SINU",
       "desc": "Sistema de Inscripción Unificado de alta disponibilidad. Mantenimiento evolutivo y soporte crítico.",
-      "tags": ["C#", ".NET", "SQL"],
+      "tags": ["ASP.NET", "Bootstrap", "SQL Server"],
       "link": "https://sinu.incorporacion.armada.mil.ar/",
       "image": "images/captura-sinu.png"
     },
     {
       "title": "Project Tracker Automation",
-      "desc": "Automatización de seguimiento de proyectos. Integración de Google Forms y ETL para visualización en tiempo real.",
-      "tags": ["ETL", "Data", "Auto"],
+      "desc": "Automatización de seguimiento de proyectos. Integración de Google Forms y ETL para visualización en tiempo real en dashboard corporativo.",
+      "tags": ["Data", "Automation", "Dashboard"],
       "link": "https://github.com/kevinvillabona/project-tracker-automation",
       "image": "images/captura-dashboard.png"
+    }
+  ],
+  "sandbox_projects": [
+    {
+      "title": "Universo Dragon Ball",
+      "desc": "Portal web interactivo en 3D para explorar el lore de los 12 universos. Renderizado avanzado e interfaz espacial.",
+      "tags": ["Web 3D", "Frontend", "Lore"],
+      "link": "https://github.com/kevinvillabona",
+      "image": "images/captura-db.png",
+      "visible": false
     }
   ],
   "education": [

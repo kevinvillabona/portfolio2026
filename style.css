@@ -5,33 +5,30 @@
     --bg-card: #ffffff;          /* White */
     --text-primary: #0f172a;     /* Slate-900 */
     --text-secondary: #475569;   /* Slate-600 */
-    --accent-color: #cc0000;     /* ROJO OSCURO (Pedido) */
+    --accent-color: #cc0000;     /* ROJO OSCURO */
     --border-color: rgba(0, 0, 0, 0.08);
     --grid-color: rgba(0, 0, 0, 0.05);
     --nav-bg: rgba(255, 255, 255, 0.8);
-    --btn-bg: #ffffff;           /* Fondo del botón en modo claro */
+    --btn-bg: #ffffff;
 }
 
 .dark {
-    /* --- MODO OSCURO (Original) --- */
+    /* --- MODO OSCURO --- */
     --bg-primary: #0b0d12;       /* Black-100 */
     --bg-card: #161b22;          /* Card Dark */
     --text-primary: #E4ECFF;     /* White-100 */
     --text-secondary: #C1C2D5;   /* White-200 */
-    --accent-color: #ff4757;     /* ROJO VIBRANTE (Original) */
+    --accent-color: #ff4757;     /* ROJO VIBRANTE */
     --border-color: rgba(255, 255, 255, 0.1);
-    /* --grid-color: rgba(255, 255, 255, 0.15); Opacidad original */
-    --grid-color: rgb(169 169 169 / 8%); /* Gris claro con opacidad reducida */
-    /* --nav-bg: rgba(0, 3, 25, 0.7); */
+    --grid-color: rgb(169 169 169 / 8%); 
     --nav-bg: rgba(11, 13, 18, 0.7);
-    --btn-bg: #0b0d12;           /* Fondo del botón en modo oscuro (Igual al bg-primary) */
+    --btn-bg: #0b0d12;
 }
 
-/* === BASE & CORRECCIÓN DE OVERFLOW === */
 html, body {
     width: 100%;
-    overflow-x: hidden !important; /* FORZAR ocultar desbordamiento horizontal */
-    position: relative; /* Necesario para contener elementos absolutos */
+    overflow-x: hidden !important; 
+    position: relative; 
 }
 
 body {
@@ -41,7 +38,7 @@ body {
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* === FONDO DE CUADRÍCULA (GRID) === */
+/* === FONDO DE CUADRÍCULA === */
 .bg-grid-pattern {
     background-size: 90px 90px;
     background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
@@ -49,7 +46,6 @@ body {
     transition: background-image 0.5s ease;
 }
 
-/* MÁSCARAS */
 .mask-gradient-hero {
     mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 90%);
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 90%);
@@ -59,55 +55,47 @@ body {
     -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 90%);
 }
 
-/* === DESTELLOS (GLEAMS) - Sutiles === */
 .grid-gleam {
     position: absolute;
-    width: 6px; /* Más pequeños */
+    width: 6px; 
     height: 6px;
     background-color: var(--accent-color);
     border-radius: 50%;
-    filter: blur(2px); /* Blur reducido */
+    filter: blur(2px); 
     opacity: 0;
     animation: gleam-pulse 4s infinite ease-in-out;
 }
 
 @keyframes gleam-pulse {
     0%, 100% { opacity: 0; transform: scale(0.8); }
-    50% { opacity: 0.6; transform: scale(1.2); } /* Opacidad máxima reducida */
+    50% { opacity: 0.6; transform: scale(1.2); } 
 }
 
-/* === TARJETAS (GLOW CARDS) - Sutil === */
 .glow-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    /* Sin box-shadow por defecto */
 }
 
-/* Gradiente sutil solo en dark mode */
 .dark .glow-card {
-    /* Un gradiente sutil entre tu color de tarjeta y uno apenas más claro */
     background: linear-gradient(90deg, #161b22 0%, #1d2229 100%);
 }
 
-/* === BOTÓN MÁGICO (RESTAURADO) === */
 .magic-btn-container {
     position: relative;
     display: inline-flex;
     overflow: hidden;
-    border-radius: 0.75rem; /* rounded-xl */
-    padding: 3px; /* El grosor del borde animado */
+    border-radius: 0.75rem; 
+    padding: 3px; 
 }
 
 .magic-btn-border {
     position: absolute;
     inset: -1000%;
     animation: spin 3s linear infinite;
-    /* Gradiente cónico sutil usando el color de acento */
     background: conic-gradient(from 90deg at 50% 50%, #E2CBFF 0%, var(--accent-color) 50%, #E2CBFF 100%);
 }
 
-/* Fondo interior del botón */
 .magic-btn-content {
     display: inline-flex;
     height: 100%;
@@ -116,15 +104,15 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 0.6rem;
-    background-color: var(--btn-bg); /* Fondo sólido */
-    padding-left: 2rem; /* px-10 */
+    background-color: var(--btn-bg); 
+    padding-left: 2rem; 
     padding-right: 2rem;
-    padding-top: 1rem; /* py-4 */
+    padding-top: 1rem; 
     padding-bottom: 1rem;
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500; /* font-medium */
+    font-size: 0.875rem; 
+    font-weight: 500; 
     color: var(--text-primary);
-    backdrop-filter: blur(64px); /* backdrop-blur-3xl */
+    backdrop-filter: blur(64px); 
     gap: 0.5rem;
     transition: color 0.3s;
     position: relative;
@@ -136,40 +124,9 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Corrección para sombra dinámica usando variable CSS */
-.timeline-dot-shadow {
-    box-shadow: 0 0 0 4px var(--bg-primary), 0 0 20px var(--accent-color);
-}
-
-/* === ANIMACIÓN DE LÍNEA DE SERPIENTE (SNAKE LINE) === */
-@keyframes snake-flow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Esta clase maneja el color y la animación */
-.snake-gradient-bg {
-    /* Los colores del botón: Morado suave -> Rojo intenso -> Morado suave */
-    background: linear-gradient(90deg, #E2CBFF, var(--accent-color), #E2CBFF);
-    background-size: 200% 200%;
-    animation: snake-flow 3s linear infinite;
-}
-
-/* Utility para las curvas suaves */
-.snake-connector {
-    position: absolute;
-    width: 100%;
-    height: 50px; /* Altura de la curva entre tarjetas */
-    bottom: -50px; /* Se ubica justo debajo de la tarjeta */
-    z-index: 0;
-}
-
-/* Contenedor principal */
 .timeline-container {
     position: relative;
     width: 100%;
-    /* Aseguramos que el contenedor tenga contexto de apilamiento */
     isolation: isolate; 
 }
 
@@ -179,7 +136,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Al fondo */
+    z-index: 0; 
     pointer-events: none;
     display: none;
 }
@@ -190,13 +147,11 @@ body {
     }
 }
 
-/* La tarjeta y el punto deben estar explícitamente arriba */
 .timeline-card-wrapper {
     position: relative;
     z-index: 10; 
 }
 
-/* Línea recta para móvil con gradiente animado */
 .mobile-line-gradient {
     position: absolute;
     left: 0;
@@ -209,63 +164,49 @@ body {
     border-radius: 99px;
 }
 
-/* Puntos con efecto elástico */
+@keyframes snake-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .timeline-dot {
     transform: scale(0);
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* Rebote elástico */
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
 }
 
 .timeline-dot.visible {
     transform: scale(1);
 }
 
-/* En móvil, quitamos la transición CSS porque JS controlará la fluidez */
 .mobile-line-gradient {
     height: 0;
-    width: 5px; /* Un poco más gruesa */
+    width: 5px; 
     border-radius: 99px;
 }
 
-/* Animación del flujo del gradiente dentro del SVG */
-.gradient-flow {
-    animation: flowAnimation 3s linear infinite;
-}
-
-@keyframes flowAnimation {
-    0% { stop-color: #E2CBFF; }
-    50% { stop-color: var(--accent-color); }
-    100% { stop-color: #E2CBFF; }
-}
-
-/* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 4px; opacity: 0.5; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
-/* === MENU MÓVIL Y ANIMACIONES HAMBURGUESA === */
-/* Transformación a 'X' */
-.hamburger-active .line-1 {
-    transform: translateY(8px) rotate(45deg);
-    background-color: var(--accent-color) !important;
+/* MENU MÓVIL Y ANIMACIONES HAMBURGUESA */
+.hamburger-active .line-1 { transform: translateY(8px) rotate(45deg); background-color: var(--accent-color) !important; }
+.hamburger-active .line-2 { opacity: 0; transform: translateX(10px); }
+.hamburger-active .line-3 { transform: translateY(-8px) rotate(-45deg); background-color: var(--accent-color) !important; }
+.mobile-menu-open { opacity: 1 !important; pointer-events: auto !important; transform: translateX(0) !important; }
+.no-scroll { overflow: hidden !important; }
+
+/* ANIMACION FILTROS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-.hamburger-active .line-2 {
-    opacity: 0;
-    transform: translateX(10px);
-}
-.hamburger-active .line-3 {
-    transform: translateY(-8px) rotate(-45deg);
-    background-color: var(--accent-color) !important;
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
-/* Mostrar menú móvil */
-.mobile-menu-open {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    transform: translateX(0) !important;
-}
-
-/* Prevenir scroll del body cuando el menú está abierto */
-.no-scroll {
-    overflow: hidden !important;
+/* INPUTS DEL FORMULARIO */
+.form-container input:focus, .form-container textarea:focus {
+    box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb, 204, 0, 0), 0.2);
 }
