@@ -489,3 +489,61 @@ function renderFooter(profile) {
     document.getElementById('social-linkedin').href = profile.linkedin;
     document.getElementById('social-github').href = profile.github;
 }
+
+// === MANEJO DEL FORMULARIO DE CONTACTO ===
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Evita recargar la página
+
+    const form = this;
+    const btn = form.querySelector('button[type="submit"]');
+    const btnContent = btn.querySelector('.magic-btn-content');
+    const originalBtnHTML = btnContent.innerHTML;
+
+    // Cambiar estado a "Cargando"
+    btnContent.innerHTML = 'Enviando... <i class="fas fa-circle-notch fa-spin ml-2"></i>';
+    btn.disabled = true;
+
+    // Construir el payload
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value
+    };
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwKM4OOz2iB2ahn4sfFhXTFy8v0avnO4rb0lqnjQl62JCEeBKLwDyOJWlyU8MEIrdXTqA/exec';
+
+    fetch(scriptURL, {
+        method: 'POST',
+        // Se envía como text/plain para evitar el preflight (OPTIONS) de CORS
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+        }
+    })
+    .then(response => {
+        showToast();
+        form.reset(); // Limpia los inputs
+    })
+    .catch(error => {
+        console.error('Error al enviar el mensaje:', error);
+        alert("Hubo un problema de conexión al enviar el mensaje. Por favor, intenta de nuevo.");
+    })
+    .finally(() => {
+        // Restaurar el botón
+        btnContent.innerHTML = originalBtnHTML;
+        btn.disabled = false;
+    });
+});
+
+// Función para mostrar/ocultar la notificación
+function showToast() {
+    const toast = document.getElementById('toast-notification');
+    
+    // Aparece
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    
+    // Desaparece después de 4.5 segundos
+    setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+    }, 4500);
+}
