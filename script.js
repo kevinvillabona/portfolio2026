@@ -85,18 +85,38 @@ function initTheme() {
 
 function renderHero(profile) {
     const heroContent = document.getElementById('hero-content');
+    const randomNum = Math.floor(Math.random() * 5) + 1;
+    
     heroContent.innerHTML = `
-        <p class="uppercase tracking-widest text-xs text-[var(--text-secondary)] max-w-80 mb-6 font-semibold" data-aos="fade-down" data-aos-delay="200">
+        <div class="relative w-32 h-32 md:w-40 md:h-40 mb-6 mx-auto group" data-aos="zoom-in" data-aos-delay="100">
+            <div class="absolute inset-0 bg-gradient-to-tr from-[var(--accent-color)] to-[#E2CBFF] rounded-3xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+            
+            <div class="relative w-full h-full rounded-3xl overflow-hidden border border-[var(--border-color)] shadow-xl">
+               <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline
+                class="w-full h-full object-cover z-10 relative filter drop-shadow-md group-hover:drop-shadow-lg transition-all duration-500"
+                >
+                    <source src="videos/video_animacion_${randomNum}.webm" type="video/webm">
+                    <source src="videos/video_animacion_${randomNum}.mov" type='video/mp4; codecs="hvc1"'>
+                    Tu navegador no soporta este video.
+                </video>
+            </div>
+        </div>
+
+        <p class="uppercase tracking-widest text-xs text-[var(--text-secondary)] max-w-80 mb-6 font-semibold mx-auto" data-aos="fade-down" data-aos-delay="200">
             ${profile.title}
         </p>
         <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-tight text-[var(--text-primary)]" data-aos="fade-up" data-aos-delay="300">
             Transformando Ideas en<br>
             <span class="text-[var(--accent-color)]">Experiencias Digitales</span>
         </h1>
-        <p class="text-[var(--text-secondary)] md:tracking-wider mb-10 text-sm md:text-lg lg:text-xl max-w-2xl" data-aos="fade-up" data-aos-delay="400">
+        <p class="text-[var(--text-secondary)] md:tracking-wider mb-10 text-sm md:text-lg lg:text-xl max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="400">
             ${profile.summary}
         </p>
-        <div class="flex gap-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="flex gap-4 justify-center" data-aos="fade-up" data-aos-delay="500">
             <a href="#projects" class="magic-btn-container group">
                 <span class="magic-btn-border"></span>
                 <span class="magic-btn-content group-hover:text-[var(--accent-color)]">
