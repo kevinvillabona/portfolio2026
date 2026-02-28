@@ -1,10 +1,10 @@
 /* === CONFIGURACIÓN DE VARIABLES CSS (THEMING) === */
 :root {
-    /* --- MODO CLARO --- */
+    /* --- MODO CLARO (Basado en Lumina) --- */
     --bg-primary: #f8fafc;       
     --bg-card: #ffffff;          
-    --text-primary: #0f172a;     
-    --text-secondary: #475569;   
+    --text-primary: #1a1a2e;     /* Actualizado a Lumina */
+    --text-secondary: #5a5a72;   /* Actualizado a Lumina */
     --accent-color: #cc0000;     
     --border-color: rgba(0, 0, 0, 0.08);
     --grid-color: rgba(0, 0, 0, 0.05);
@@ -37,12 +37,14 @@ body {
     color: var(--text-primary);
     scroll-behavior: smooth;
     transition: background-color 0.5s ease, color 0.5s ease;
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Tipografía principal Lumina */
+    line-height: 1.6; /* Interlineado Lumina */
 }
 
 /* Todos los párrafos mantendrán una legibilidad óptima por defecto */
 p {
     color: var(--text-secondary);
-    line-height: 1.625;
+    line-height: 1.6;
     font-size: 1rem;
     font-weight: 400;
 }
@@ -124,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 1rem; 
     padding-bottom: 1rem;
     font-size: 0.875rem; 
-    font-weight: 500; 
+    font-weight: 600; /* Actualizado a 600 por Lumina */
     color: var(--text-primary);
     backdrop-filter: blur(64px); 
     gap: 0.5rem;

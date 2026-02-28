@@ -132,10 +132,10 @@ function renderHero(profile) {
             </div>
         </div>
         <p class="uppercase tracking-widest text-xs text-[var(--text-secondary)] mb-4 font-bold mx-auto" data-aos="fade-down" data-aos-delay="200">${profile.title}</p>
-        <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight" data-aos="fade-up" data-aos-delay="300">
+        <h1 class="font-heading text-[clamp(3rem,8vw,6rem)] font-[800] tracking-[-2px] leading-[1.1] mb-6 max-w-[900px] mx-auto text-[var(--text-primary)]" data-aos="fade-up" data-aos-delay="300">
             ${profile.name}<br><span class="text-[var(--accent-color)]">${profile.surname}</span>
         </h1>
-        <p class="mb-10 text-lg md:text-xl max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="400">${profile.summary}</p>
+        <p class="mb-10 text-[1.2rem] text-[var(--text-secondary)] max-w-[600px] mx-auto leading-[1.6]" data-aos="fade-up" data-aos-delay="400">${profile.summary}</p>
         <div class="flex gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
             <a href="#projects" class="magic-btn-container group">
                 <span class="magic-btn-border"></span>
@@ -164,13 +164,13 @@ function renderBento(data) {
         <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-between" data-aos="fade-right" data-aos-delay="100">
             <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none"><div class="absolute top-0 right-0 text-[var(--accent-color)] rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-8xl"></i></div></div>
             <div class="relative z-10">
-                <div class="flex items-center justify-between mb-8"><h3 class="font-heading font-bold text-xl text-[var(--text-primary)]">Formación <span class="text-[var(--accent-color)]">Académica</span></h3></div>
+                <div class="flex items-center justify-between mb-8"><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Formación <span class="text-[var(--accent-color)]">Académica</span></h3></div>
                 <div class="flex flex-col justify-center">${educationHTML}</div>
             </div>
         </div>
         <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 md:p-8 h-full justify-center min-h-[300px]" data-aos="fade-left" data-aos-delay="200">
             <div class="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
-            <div class="relative z-10 mb-auto"><p class="text-[var(--text-secondary)] text-xs mb-2 uppercase tracking-widest font-bold">Habilidades Técnicas</p><h3 class="font-heading font-bold text-xl text-[var(--text-primary)]">Stack Principal</h3></div>
+            <div class="relative z-10 mb-auto"><p class="text-[var(--text-secondary)] text-xs mb-2 uppercase tracking-widest font-bold">Habilidades Técnicas</p><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Stack Principal</h3></div>
             <div class="flex gap-3 w-fit absolute right-4 h-[120%] -top-[10%] overflow-hidden mask-gradient-hero py-4">
                 <div class="flex flex-col gap-3 animate-scroll-vertical">${skillsHTML}${skillsHTML}</div>
                 <div class="flex flex-col gap-3 animate-scroll-vertical" style="animation-delay: -5s;">${skillsHTML}${skillsHTML}</div>
@@ -179,15 +179,15 @@ function renderBento(data) {
         <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 md:p-8 min-h-[200px]" data-aos="fade-up" data-aos-delay="300">
              <div class="font-mono text-[10px] absolute inset-0 text-[var(--text-secondary)] opacity-10 p-4 leading-relaxed overflow-hidden select-none z-0">import pandas as pd<br>df = pd.read_csv('data.csv')<br>model.fit(X_train, y_train)<br># Future Loading...</div>
              <div class="relative z-10 flex flex-col h-full">
-                <div><div class="inline-block px-2.5 py-1 mb-3 text-[10px] font-bold tracking-wider text-[var(--accent-color)] uppercase bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full shadow-sm"><i class="fas fa-circle text-[6px] mr-1.5 animate-pulse"></i> Activo</div><h3 class="font-heading font-bold text-xl text-[var(--text-primary)]">${data.status.current}</h3></div>
-                <div class="mt-4"><p class="mb-4 text-sm text-[var(--text-secondary)]">${data.status.description}</p><a href="${data.profile.github}" target="_blank" class="text-sm font-semibold text-[var(--text-primary)] hover:text-[var(--accent-color)] flex items-center gap-2 transition-colors">Ver actividad en GitHub <i class="fas fa-arrow-right"></i></a></div>
+                <div><div class="inline-block px-2.5 py-1 mb-3 text-[10px] font-bold tracking-wider text-[var(--accent-color)] uppercase bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full shadow-sm"><i class="fas fa-circle text-[6px] mr-1.5 animate-pulse"></i> Activo</div><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">${data.status.current}</h3></div>
+                <div class="mt-4"><p class="mb-4 text-sm text-[var(--text-secondary)]">${data.status.description}</p><a href="${data.profile.github}" target="_blank" class="text-sm font-[600] text-[var(--text-primary)] hover:text-[var(--accent-color)] flex items-center gap-2 transition-colors">Ver actividad en GitHub <i class="fas fa-arrow-right"></i></a></div>
              </div>
         </div>
         <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl relative overflow-hidden group cursor-pointer" onclick="document.getElementById('nav-cv-btn').click()" data-aos="zoom-in" data-aos-delay="400">
             <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" alt="Clean Code" class="w-full h-full object-cover opacity-20 dark:opacity-10 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 ease-out"><div class="absolute inset-0 bg-gradient-to-r from-[var(--bg-card)] via-[var(--bg-card)]/90 to-transparent"></div></div>
             <div class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 h-full">
-                <div class="max-w-lg w-full"><h3 class="font-heading font-bold text-xl text-[var(--text-primary)]">Arquitectura y Estrategia</h3><p class="mt-3 text-sm text-[var(--text-secondary)]">Priorizo la escalabilidad, el código limpio y el liderazgo técnico efectivo.</p></div>
-                <div class="flex-shrink-0 flex flex-col items-center justify-center"><div class="w-14 h-14 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-primary)] group-hover:bg-[var(--accent-color)] group-hover:text-white group-hover:border-[var(--accent-color)] group-hover:scale-110 shadow-[0_0_20px_rgba(0,0,0,0.05)] transition-all duration-300"><i class="fas fa-download text-xl"></i></div><p class="text-[10px] text-center mt-3 font-bold uppercase tracking-widest text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-all duration-300">Descargar CV</p></div>
+                <div class="max-w-lg w-full"><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Arquitectura y Estrategia</h3><p class="mt-3 text-sm text-[var(--text-secondary)]">Priorizo la escalabilidad, el código limpio y el liderazgo técnico efectivo.</p></div>
+                <div class="flex-shrink-0 flex flex-col items-center justify-center"><div class="w-14 h-14 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-primary)] group-hover:bg-[var(--accent-color)] group-hover:text-white group-hover:border-[var(--accent-color)] group-hover:scale-110 shadow-[0_0_20px_rgba(0,0,0,0.05)] transition-all duration-300"><i class="fas fa-download text-xl"></i></div><p class="text-[10px] text-center mt-3 font-[800] uppercase tracking-widest text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-all duration-300">Descargar CV</p></div>
             </div>
             <div class="absolute inset-0 border-2 border-transparent group-hover:border-[var(--accent-color)]/30 rounded-3xl transition-colors pointer-events-none"></div>
         </div>
@@ -202,7 +202,7 @@ function renderProjects(projects) {
     projects.forEach(p => p.tags.forEach(tag => allTags.add(tag)));
     
     filterContainer.innerHTML = Array.from(allTags).map((tag, index) => `
-        <button class="filter-btn px-4 py-1.5 rounded text-xs font-medium border border-[var(--border-color)] transition-all ${index === 0 ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]' : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:border-[var(--accent-color)]'}" data-filter="${tag}">
+        <button class="filter-btn px-4 py-1.5 rounded text-xs font-[600] border border-[var(--border-color)] transition-all ${index === 0 ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]' : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:border-[var(--accent-color)]'}" data-filter="${tag}">
             ${tag}
         </button>
     `).join('');
@@ -223,11 +223,11 @@ function renderProjects(projects) {
                      <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-[var(--bg-card)]/95 to-transparent transition-opacity duration-500"></div>
                 </div>
                 <div class="relative z-10 flex flex-col h-full justify-end">
-                    <h3 class="font-heading font-bold text-xl mb-3 text-[var(--text-primary)] drop-shadow-sm line-clamp-1">${proj.title}</h3>
+                    <h3 class="font-heading font-[800] text-[1.5rem] mb-3 text-[var(--text-primary)] drop-shadow-sm line-clamp-1">${proj.title}</h3>
                     <p class="line-clamp-2 mb-6 drop-shadow-sm text-sm text-[var(--text-secondary)]">${proj.desc}</p>
                     <div class="flex flex-row items-center justify-between gap-4 mt-2">
                         <div class="flex flex-wrap gap-2">${tagsHTML}</div>
-                        <a href="${proj.link}" target="_blank" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm font-semibold group/btn hover:brightness-110 hover:border-[var(--accent-color)] transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-[var(--border-color)] text-nowrap shadow-sm">
+                        <a href="${proj.link}" target="_blank" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm font-[600] group/btn hover:brightness-110 hover:border-[var(--accent-color)] transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-[var(--border-color)] text-nowrap shadow-sm">
                             ${btnText} <i class="${btnIcon} transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                         </a>
                     </div>
@@ -299,7 +299,7 @@ function renderSandbox(sandboxProjects) {
                  <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-[var(--bg-card)]/95 to-transparent"></div>
             </div>
             <div class="relative z-10 flex flex-col h-full justify-end">
-                <h3 class="font-heading font-bold text-xl mb-3 text-[var(--text-primary)] line-clamp-1">${proj.title}</h3>
+                <h3 class="font-heading font-[800] text-[1.5rem] mb-3 text-[var(--text-primary)] line-clamp-1">${proj.title}</h3>
                 <p class="line-clamp-2 mb-6 text-sm text-[var(--text-secondary)]">${proj.desc}</p>
                 <div class="flex flex-row items-center justify-between gap-4 mt-2">
                     <div class="flex flex-wrap gap-2">${tagsHTML}</div>
@@ -331,7 +331,7 @@ function renderExperience(experience) {
         return `
             <div class="relative pl-6 border-l-2 border-[var(--border-color)] transition-colors duration-300 mb-8 last:mb-0 group/role">
                 <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full ${isPresent ? 'bg-[var(--accent-color)]' : 'bg-[var(--bg-primary)]'} border-2 border-[var(--border-color)] group-hover/role:border-[var(--accent-color)] transition-colors"></div>
-                <h4 class="text-base font-bold text-[var(--text-primary)] mb-1">${role.title}</h4>
+                <h4 class="text-[1.2rem] font-[600] text-[var(--text-primary)] mb-1">${role.title}</h4>
                 <p class="text-xs font-mono font-semibold ${isPresent ? 'text-[var(--accent-color)]' : 'text-[var(--text-secondary)]'} mb-3 uppercase tracking-widest">${role.date}</p>
                 <ul class="list-disc list-outside ml-4 space-y-2">
                     ${role.tasks.map(task => `<li class="text-[var(--text-secondary)] pl-1"><p class="inline-block !mb-0 text-sm">${task}</p></li>`).join('')}
@@ -352,8 +352,8 @@ function renderExperience(experience) {
                             <img src="${company.logo}" alt="${company.company}" class="w-full h-full object-contain rounded-full" onload="initTimelineLines(${experience.length})" onerror="this.style.display='none';">
                         </div>
                         <div>
-                            <h3 class="font-heading text-xl font-bold text-[var(--text-primary)] mb-1">${company.company}</h3>
-                            <p class="text-xs font-medium text-[var(--text-secondary)] flex items-center gap-2"><i class="fa-solid fa-location-dot text-[var(--accent-color)]"></i> ${company.location}</p>
+                            <h3 class="font-heading text-[1.5rem] font-[800] text-[var(--text-primary)] mb-1">${company.company}</h3>
+                            <p class="text-xs font-[600] text-[var(--text-secondary)] flex items-center gap-2"><i class="fa-solid fa-location-dot text-[var(--accent-color)]"></i> ${company.location}</p>
                         </div>
                     </div>
                     <div class="space-y-4">${rolesHTML}</div>
