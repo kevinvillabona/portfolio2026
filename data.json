@@ -1,14 +1,14 @@
 {
   "profile": {
-    "name": "KEVIN",
-    "surname": "VILLABONA",
+    "name": "Kevin",
+    "surname": "Villabona",
     "title": "TECH LEAD & SOFTWARE DEVELOPER",
     "email": "kevinvillabona@gmail.com",
     "linkedin": "https://linkedin.com/in/kevinvillabona",
     "github": "https://github.com/kevinvillabona",
     "cv_file": "docs/kevin-villabona-cv-es.pdf",
     "avatar": ["images/final_1.png", "images/final_2.png"],
-    "summary": "Líder Técnico y Desarrollador de software especializado en diseño de arquitecturas .NET y optimización de procesos. Base en Argentina, mentalidad global.",
+    "summary": "Desarrollador de software y lider técnico, especializado en diseño de arquitecturas .NET y optimización de procesos. <br> Apasionado por la innovación tecnológica.",
     "location": "Argentina"
   },
   "status": {
@@ -16,7 +16,7 @@
     "description": "Integrando análisis predictivo al desarrollo de software."
   },
   "skills_scroll": [
-    "C#", ".NET Core", "SQL Server", "Azure", "JavaScript", "React", "Docker", "Python", "Data Science"
+    "C#", ".NET Core", ".NET Framework", "ASP.NET", "SQL Server", "Bootstrap", "UX/UI", "JavaScript", "React","Next.js", "Docker", "Python", "Data Science", "IA"
   ],
   "experience": [
     {
@@ -74,7 +74,7 @@
     {
       "title": "Plataforma COAMAS",
       "desc": "Gestión de documentación operativa y noticias para el Atlántico Sur. Desarrollo Full Stack con Entity Framework.",
-      "tags": ["ASP.NET", "Ef", "Bootstrap", "SQL Server"],
+      "tags": ["ASP.NET", "EF", "Bootstrap", "SQL Server"],
       "link": "https://www.coamas.org/",
       "image": "images/captura-coamas.png"
     },
@@ -103,8 +103,8 @@
   "sandbox_projects": [
     {
       "title": "Universo Dragon Ball",
-      "desc": "Portal web interactivo en 3D para explorar el lore de los 12 universos. Renderizado avanzado e interfaz espacial.",
-      "tags": ["Web 3D", "Frontend", "Lore"],
+      "desc": "Portal web interactivo en 3D. Renderizado avanzado.",
+      "tags": ["Web 3D", "Frontend", "Fantasy"],
       "link": "https://github.com/kevinvillabona",
       "image": "images/captura-db.png",
       "visible": false

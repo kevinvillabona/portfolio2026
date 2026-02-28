@@ -1,11 +1,11 @@
 /* === CONFIGURACIÓN DE VARIABLES CSS (THEMING) === */
 :root {
     /* --- MODO CLARO --- */
-    --bg-primary: #f8fafc;       /* Slate-50 */
-    --bg-card: #ffffff;          /* White */
-    --text-primary: #0f172a;     /* Slate-900 */
-    --text-secondary: #475569;   /* Slate-600 */
-    --accent-color: #cc0000;     /* ROJO OSCURO */
+    --bg-primary: #f8fafc;       
+    --bg-card: #ffffff;          
+    --text-primary: #0f172a;     
+    --text-secondary: #475569;   
+    --accent-color: #cc0000;     
     --border-color: rgba(0, 0, 0, 0.08);
     --grid-color: rgba(0, 0, 0, 0.05);
     --nav-bg: rgba(255, 255, 255, 0.8);
@@ -14,17 +14,18 @@
 
 .dark {
     /* --- MODO OSCURO --- */
-    --bg-primary: #0b0d12;       /* Black-100 */
-    --bg-card: #161b22;          /* Card Dark */
-    --text-primary: #E4ECFF;     /* White-100 */
-    --text-secondary: #C1C2D5;   /* White-200 */
-    --accent-color: #ff4757;     /* ROJO VIBRANTE */
+    --bg-primary: #0b0d12;       
+    --bg-card: #161b22;          
+    --text-primary: #E4ECFF;     
+    --text-secondary: #C1C2D5;   
+    --accent-color: #ff4757;     
     --border-color: rgba(255, 255, 255, 0.1);
     --grid-color: rgb(169 169 169 / 8%); 
     --nav-bg: rgba(11, 13, 18, 0.7);
     --btn-bg: #0b0d12;
 }
 
+/* === ESTANDARIZACIÓN TIPOGRÁFICA GLOBAL === */
 html, body {
     width: 100%;
     overflow-x: hidden !important; 
@@ -36,6 +37,19 @@ body {
     color: var(--text-primary);
     scroll-behavior: smooth;
     transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Todos los párrafos mantendrán una legibilidad óptima por defecto */
+p {
+    color: var(--text-secondary);
+    line-height: 1.625;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    line-height: 1.2;
 }
 
 /* === FONDO DE CUADRÍCULA === */

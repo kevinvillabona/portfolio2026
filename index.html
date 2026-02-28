@@ -12,12 +12,15 @@
 
     <meta property="og:title" content="Portfolio | Kevin Villabona">
     <meta property="og:description" content="Líder Técnico y Desarrollador de software especializado en diseño de arquitecturas .NET y optimización de procesos.">
-    <!-- <meta property="og:image" content="https://tudominio.com/images/og-image.jpg"> <meta property="og:url" content="https://tudominio.com"> -->
     <meta property="og:type" content="website">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     <script>
@@ -27,8 +30,8 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        heading: ['Montserrat', 'sans-serif'],
-                        mono: ['monospace'], 
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'], 
                     },
                     animation: {
                         'scroll-vertical': 'scroll-vertical 10s linear infinite',
@@ -101,7 +104,7 @@
         <div class="absolute -top-40 left-0 md:left-60 md:-top-20 w-[50vh] h-[50vh] bg-[var(--text-secondary)] opacity-5 dark:opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
         <div class="absolute -top-10 right-0 w-[40vh] h-[80vh] bg-[var(--accent-color)] opacity-10 dark:opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
 
-        <div id="hero-content" class="relative z-10 max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center text-center">
+         <div id="hero-content" class="relative z-10 max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center text-center">
             <div class="w-32 h-32 md:w-40 md:h-40 bg-[var(--border-color)] rounded-3xl mb-6 animate-pulse-slow"></div>
             <div class="w-48 h-4 bg-[var(--border-color)] rounded mb-6 animate-pulse-slow"></div>
             <div class="w-3/4 h-12 bg-[var(--border-color)] rounded mb-4 animate-pulse-slow"></div>
@@ -134,7 +137,7 @@
         </h2>
         
         <div id="projects-filter" class="flex flex-wrap justify-center gap-2 mb-12" data-aos="fade-up" data-aos-delay="100">
-            </div>
+        </div>
 
         <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
             <div class="w-full h-[400px] bg-[var(--border-color)] rounded-3xl animate-pulse-slow"></div>
@@ -149,11 +152,11 @@
             </h2>
             <i class="fas fa-flask text-2xl text-[var(--accent-color)] animate-bounce"></i>
         </div>
-        <p class="text-center text-[var(--text-secondary)] max-w-2xl mx-auto mb-12 -mt-10" data-aos="fade-up" data-aos-delay="100">
+        <p class="text-center max-w-2xl mx-auto mb-12 -mt-10" data-aos="fade-up" data-aos-delay="100">
             Espacio dedicado a proyectos personales, exploración de nuevas tecnologías, conceptos de diseño y desarrollos creativos.
         </p>
         <div id="sandbox-grid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
-            </div>
+        </div>
     </section>
 
     <footer class="relative pt-20 pb-10 w-full overflow-hidden flex flex-col items-center" id="contact">
@@ -161,9 +164,9 @@
         
         <div class="relative z-10 flex flex-col items-center px-4 w-full max-w-4xl" data-aos="zoom-in-up" data-aos-delay="200">
              <h2 class="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-center mb-6 text-[var(--text-primary)]">
-                ¿Listo para <span class="text-[var(--accent-color)]">colaborar</span>?
+                Contacto <span class="text-[var(--accent-color)]">Profesional</span>
             </h2>
-            <p class="text-[var(--text-secondary)] mb-10 text-center">Hablemos sobre tu próximo gran proyecto.</p>
+            <p class="mb-10 text-center">Estoy disponible para establecer contacto y evaluar oportunidades profesionales.</p>
 
             <form id="contact-form" method="POST" class="w-full form-container bg-[var(--bg-card)] border border-[var(--border-color)] p-6 md:p-8 rounded-3xl relative z-20">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -190,11 +193,11 @@
                 </div>
             </form>
 
-            <div class="flex flex-col md:flex-row justify-between items-center w-full mt-20 text-[var(--text-secondary)] text-sm gap-4 pt-8">
-                <p id="copyright"></p>
+            <div class="flex flex-col md:flex-row justify-between items-center w-full mt-20 text-sm gap-4 pt-8">
+                <p id="copyright" class="text-[var(--text-secondary)] text-sm"></p>
                 <div class="flex gap-4">
-                    <a id="social-linkedin" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all"><i class="fab fa-linkedin-in text-lg"></i></a>
-                    <a id="social-github" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all"><i class="fab fa-github text-lg"></i></a>
+                    <a id="social-linkedin" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all text-[var(--text-secondary)]"><i class="fab fa-linkedin-in text-lg"></i></a>
+                    <a id="social-github" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all text-[var(--text-secondary)]"><i class="fab fa-github text-lg"></i></a>
                 </div>
             </div>
         </div>
