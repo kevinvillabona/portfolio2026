@@ -170,7 +170,7 @@ function renderExpertise(expertise) {
     if (!container || !expertise) return;
     
     container.innerHTML = expertise.map((exp, index) => `
-        <div class="glow-card p-5 md:p-8 rounded-2xl md:rounded-3xl flex flex-col items-start group hover:-translate-y-1 md:hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden h-full" data-aos="fade-up" data-aos-delay="${index * 100}">
+        <div class="glow-card p-5 md:p-8 rounded-3xl flex flex-col items-start group hover:-translate-y-1 md:hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden h-full" data-aos="fade-up" data-aos-delay="${index * 100}">
             <div class="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 mb-3 md:mb-0 w-full z-10">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center md:mb-6 shrink-0 group-hover:border-[var(--accent-color)] transition-all duration-300 group-hover:bg-[var(--accent-color)] group-hover:text-white text-[var(--accent-color)] shadow-sm group-hover:shadow-md md:group-hover:scale-110">
                     <i class="${exp.icon} text-xl md:text-2xl"></i>
@@ -202,7 +202,7 @@ function renderBento(data) {
         const skillName = skill.name || "-";
         
         return `
-        <span class="py-1.5 px-3 text-xs font-mono font-medium rounded-lg text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] hover:text-[var(--text-primary)] transition-all cursor-default flex items-center justify-center gap-2 shadow-sm group/skill">
+        <span class="py-1.5 px-3 text-xs font-mono font-medium rounded text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] hover:text-[var(--text-primary)] transition-all cursor-default flex items-center justify-center gap-2 group/skill">
             <i class="${iconClass} text-base opacity-70 group-hover/skill:opacity-100 group-hover/skill:text-[var(--accent-color)] transition-colors group-hover/skill:scale-110"></i> 
             ${skillName}
         </span>`;
@@ -212,8 +212,8 @@ function renderBento(data) {
     const skillsHTML2 = createSkillTags(shuffledSkills2);
     
     const educationHTML = (data.education || []).map(edu => `
-    <div class="flex items-start gap-4 mb-2 p-3 -mx-3 rounded-xl hover:bg-[var(--bg-primary)] border border-transparent hover:border-[var(--border-color)] transition-all duration-300 group/edu">
-        <div class="mt-1 min-w-[36px] h-[36px] rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-color)] group-hover/edu:scale-110 group-hover:bg-[var(--accent-color)] group-hover/edu:text-white shadow-sm transition-all duration-300">
+    <div class="flex items-start gap-4 mb-2 py-2 px-3 rounded-xl hover:bg-[var(--bg-primary)] border border-transparent hover:border-[var(--border-color)] transition-all duration-300 group/edu">
+        <div class="mt-1 min-w-[36px] h-[36px] rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-color)] group-hover/edu:scale-110 group-hover:bg-[var(--accent-color)] shadow-sm transition-all duration-300">
             <i class="fas fa-graduation-cap text-sm"></i>
         </div>
         <div>
@@ -228,7 +228,7 @@ function renderBento(data) {
         <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-between" data-aos="fade-right" data-aos-delay="100">
             <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none"><div class="absolute top-0 right-0 text-[var(--accent-color)] rotate-[-20deg] scale-150"><i class="fas fa-graduation-cap text-8xl"></i></div></div>
             <div class="relative z-10">
-                <div class="flex items-center justify-between mb-8"><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Formación <span class="text-[var(--accent-color)]">Académica</span></h3></div>
+                <div class="flex items-center justify-between mb-5"><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Formación <span class="text-[var(--accent-color)]">Académica</span></h3></div>
                 <div class="flex flex-col justify-center">${educationHTML}</div>
             </div>
         </div>
@@ -257,7 +257,7 @@ function renderBento(data) {
             <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" alt="Clean Code" class="w-full h-full object-cover opacity-20 dark:opacity-10 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 ease-out"><div class="absolute inset-0 bg-gradient-to-r from-[var(--bg-card)] via-[var(--bg-card)]/90 to-transparent"></div></div>
             <div class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 h-full">
                 <div class="max-w-lg w-full"><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Arquitectura y Estrategia</h3><p class="mt-3 text-sm text-[var(--text-secondary)]">Priorizo la escalabilidad, el código limpio y el liderazgo técnico efectivo.</p></div>
-                <div class="flex-shrink-0 flex flex-col items-center justify-center"><div class="w-14 h-14 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-primary)] group-hover:bg-[var(--accent-color)] group-hover:text-white group-hover:border-[var(--accent-color)] group-hover:scale-110 shadow-[0_0_20px_rgba(0,0,0,0.05)] transition-all duration-300"><i class="fas fa-download text-xl"></i></div><p class="text-[10px] text-center mt-3 font-[800] uppercase tracking-widest text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-all duration-300">Descargar CV</p></div>
+                <div class="flex-shrink-0 flex md:flex-col items-center justify-center"><div class="w-14 h-14 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-primary)] group-hover:bg-[var(--accent-color)] group-hover:text-white group-hover:border-[var(--accent-color)] group-hover:scale-110 shadow-[0_0_20px_rgba(0,0,0,0.05)] transition-all duration-300"><i class="fas fa-download text-xl"></i></div><p class="text-[10px] text-center md:mt-3 font-[800] uppercase tracking-widest text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-all duration-300 ms-3 md:ms-0">Descargar CV</p></div>
             </div>
             <div class="absolute inset-0 border-2 border-transparent group-hover:border-[var(--accent-color)]/30 rounded-3xl transition-colors pointer-events-none"></div>
         </div>
