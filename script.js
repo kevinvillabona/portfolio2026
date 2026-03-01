@@ -212,15 +212,17 @@ function renderBento(data) {
     const skillsHTML2 = createSkillTags(shuffledSkills2);
     
     const educationHTML = (data.education || []).map(edu => `
-        <div class="flex items-start gap-3 mb-5 last:mb-0 group/edu">
-            <div class="mt-1 min-w-[30px] h-[30px] rounded-lg bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-color)] group-hover/edu:scale-110 transition-transform"><i class="fas fa-graduation-cap text-sm"></i></div>
-            <div>
-                <h4 class="text-base font-bold text-[var(--text-primary)] leading-tight mb-1">${edu.degree}</h4>
-                <p class="text-sm !text-[var(--text-secondary)] !leading-tight">${edu.school}</p>
-                <span class="text-xs font-mono font-semibold text-[var(--accent-color)] mt-1.5 inline-block tracking-wider uppercase">${edu.year}</span>
-            </div>
+    <div class="flex items-start gap-4 mb-2 p-3 -mx-3 rounded-xl hover:bg-[var(--bg-primary)] border border-transparent hover:border-[var(--border-color)] transition-all duration-300 group/edu">
+        <div class="mt-1 min-w-[36px] h-[36px] rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-color)] group-hover/edu:scale-110 group-hover:bg-[var(--accent-color)] group-hover/edu:text-white shadow-sm transition-all duration-300">
+            <i class="fas fa-graduation-cap text-sm"></i>
         </div>
-    `).join('');
+        <div>
+            <h4 class="text-base font-bold text-[var(--text-primary)] leading-tight mb-1">${edu.degree}</h4>
+            <p class="text-sm !text-[var(--text-secondary)] !leading-tight">${edu.school}</p>
+            <span class="text-[10px] font-mono font-semibold text-[var(--text-secondary)] group-hover/edu:text-[var(--accent-color)] mt-1.5 inline-block tracking-widest uppercase transition-colors">${edu.year}</span>
+        </div>
+    </div>
+`).join('');
 
     grid.innerHTML = `
         <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-between" data-aos="fade-right" data-aos-delay="100">
@@ -287,7 +289,12 @@ function renderProjects(projects) {
             return `
             <div class="glow-card rounded-3xl relative overflow-hidden h-[420px] flex flex-col justify-end p-6 md:p-8 group animate-fade-in border border-[var(--border-color)]">
                 <div class="absolute inset-0 z-0">
-                     <img src="${proj.image}" onerror="this.src='https://via.placeholder.com/800x600/ccc/333?text=${encodeURIComponent(proj.title)}'" alt="${proj.title}" class="w-full h-full object-cover opacity-40 transform transition-all duration-700 group-hover:scale-105 group-hover:opacity-90">
+                     <img src="${proj.image}" 
+                        loading="lazy" 
+                        decoding="async" 
+                        onerror="this.src='https://via.placeholder.com/800x600/ccc/333?text=${encodeURIComponent(proj.title)}'" 
+                        alt="${proj.title}" 
+                        class="w-full h-full object-cover opacity-40 transform transition-all duration-700 group-hover:scale-105 group-hover:opacity-90">
                      <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-[var(--bg-card)]/95 to-transparent transition-opacity duration-500"></div>
                 </div>
                 <div class="relative z-10 flex flex-col h-full justify-end">
@@ -363,7 +370,12 @@ function renderSandbox(sandboxProjects) {
         return `
         <div class="glow-card rounded-3xl relative overflow-hidden h-[380px] flex flex-col justify-end p-6 md:p-8 group" data-aos="fade-up" data-aos-delay="${index * 150}">
             <div class="absolute inset-0 z-0">
-                 <img src="${proj.image}" onerror="this.src='https://via.placeholder.com/800x600/ccc/333?text=Sandbox'" alt="${proj.title}" class="w-full h-full object-cover opacity-20 dark:opacity-30 transform transition-all duration-700 group-hover:scale-105 group-hover:opacity-70 grayscale group-hover:grayscale-0">
+                 <img src="${proj.image}" 
+                    loading="lazy" 
+                    decoding="async"
+                    onerror="this.src='https://via.placeholder.com/800x600/ccc/333?text=Sandbox'" 
+                    alt="${proj.title}" 
+                    class="w-full h-full object-cover opacity-20 dark:opacity-30 transform transition-all duration-700 group-hover:scale-105 group-hover:opacity-70 grayscale group-hover:grayscale-0">
                  <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-[var(--bg-card)]/95 to-transparent"></div>
             </div>
             <div class="relative z-10 flex flex-col h-full justify-end">
@@ -600,9 +612,14 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     const btn = form.querySelector('button[type="submit"]');
     const btnContent = btn.querySelector('.magic-btn-content');
     const originalBtnHTML = btnContent.innerHTML;
+    const formInputs = form.querySelectorAll('input, textarea');
 
     btnContent.innerHTML = 'Enviando... <i class="fas fa-circle-notch fa-spin ml-2"></i>';
     btn.disabled = true;
+    formInputs.forEach(input => {
+        input.disabled = true;
+        input.classList.add('opacity-70', 'cursor-not-allowed'); // Feedback visual
+    });
 
     const formData = {
         name: document.getElementById('name').value,
@@ -630,6 +647,10 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     .finally(() => {
         btnContent.innerHTML = originalBtnHTML;
         btn.disabled = false;
+        formInputs.forEach(input => {
+            input.disabled = false;
+            input.classList.remove('opacity-70', 'cursor-not-allowed');
+        });
     });
 });
 
