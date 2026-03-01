@@ -11,6 +11,42 @@
     "summary": "Desarrollador de software y lider técnico, especializado en diseño de arquitecturas .NET y optimización de procesos. <br> Apasionado por la innovación tecnológica.",
     "location": "Argentina"
   },
+  "metrics": [
+    {
+      "value": "+5",
+      "label": "Años de Experiencia"
+    },
+    {
+      "value": "+10",
+      "label": "Desarrollos End-to-End"
+    },
+    {
+      "value": "+5",
+      "label": "Mantenimientos Evolutivos"
+    }
+  ],
+  "expertise": [
+    {
+      "title": "Arquitectura de Software",
+      "desc": "Diseño de sistemas escalables, seguros y resilientes en entornos .NET preparados para alta concurrencia.",
+      "icon": "fas fa-sitemap"
+    },
+    {
+      "title": "Liderazgo Técnico",
+      "desc": "Definición de roadmaps estratégicos, mentoría de equipos y aseguramiento de la calidad del código.",
+      "icon": "fas fa-users-cog"
+    },
+    {
+      "title": "Optimización de Sistemas",
+      "desc": "Reingeniería de sistemas legacy, optimización de consultas en bases de datos y mejoras de latencia.",
+      "icon": "fas fa-gauge-high"
+    },
+    {
+      "title": "Ciencia de Datos",
+      "desc": "Integración de modelos de análisis predictivo y automatización de procesos mediante ETLs y Python.",
+      "icon": "fas fa-chart-line"
+    }
+  ],
   "status": {
     "current": "Finalizando Licenciatura en Ciencia de Datos",
     "description": "Integrando análisis predictivo al desarrollo de software."

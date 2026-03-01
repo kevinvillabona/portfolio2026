@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             renderHero(data.profile);
+            renderMetrics(data.metrics);
             renderBento(data);
+            renderExpertise(data.expertise);
             renderProjects(data.projects);
             renderSandbox(data.sandbox_projects);
             renderExperience(data.experience);
@@ -143,6 +145,42 @@ function renderHero(profile) {
             </a>
         </div>
     `;
+}
+
+// === RENDER METRICS OPTIMIZADO PARA MOBILE ===
+function renderMetrics(metrics) {
+    const container = document.getElementById('metrics-container');
+    if (!container || !metrics) return;
+    
+    container.innerHTML = `
+        <div class="grid grid-cols-3 gap-2 md:gap-6 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl p-4 md:p-8 relative overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+            <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+            ${metrics.map((m, i) => `
+                <div class="flex flex-col items-center justify-center text-center relative z-10 px-1 md:px-0 ${i !== metrics.length - 1 ? 'border-r border-[var(--border-color)]' : ''}">
+                    <span class="font-heading text-2xl sm:text-3xl md:text-5xl font-extrabold text-[var(--accent-color)] mb-1 md:mb-2 drop-shadow-sm">${m.value}</span>
+                    <span class="text-[0.6rem] sm:text-[0.7rem] md:text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider md:tracking-widest leading-tight">${m.label}</span>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// === RENDER EXPERTISE OPTIMIZADO PARA MOBILE ===
+function renderExpertise(expertise) {
+    const container = document.getElementById('expertise-grid');
+    if (!container || !expertise) return;
+    
+    container.innerHTML = expertise.map((exp, index) => `
+        <div class="glow-card p-5 md:p-8 rounded-2xl md:rounded-3xl flex flex-col items-start group hover:-translate-y-1 md:hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden h-full" data-aos="fade-up" data-aos-delay="${index * 100}">
+            <div class="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0 mb-3 md:mb-0 w-full z-10">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center md:mb-6 shrink-0 group-hover:border-[var(--accent-color)] transition-all duration-300 group-hover:bg-[var(--accent-color)] group-hover:text-white text-[var(--accent-color)] shadow-sm group-hover:shadow-md md:group-hover:scale-110">
+                    <i class="${exp.icon} text-xl md:text-2xl"></i>
+                </div>
+                <h3 class="font-heading text-lg md:text-xl font-[800] text-[var(--text-primary)] md:mb-3 leading-tight">${exp.title}</h3>
+            </div>
+            <p class="text-[var(--text-secondary)] text-sm leading-relaxed z-10">${exp.desc}</p>
+        </div>
+    `).join('');
 }
 
 function renderBento(data) {
@@ -320,7 +358,7 @@ function renderExperience(experience) {
     const container = document.getElementById('experience-grid');
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
     
-    container.className = "timeline-container max-w-6xl mx-auto px-4 sm:px-6 pb-20";
+    container.className = "timeline-container max-w-6xl mx-auto px-4 sm:px-6";
     container.innerHTML = `<svg id="timeline-canvas" class="timeline-svg"></svg>`;
 
     const content = experience.map((company, index) => {
