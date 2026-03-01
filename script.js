@@ -140,7 +140,7 @@ function renderHero(profile) {
         </h1>
         <p class="mb-10 text-[1.2rem] text-[var(--text-secondary)] max-w-[600px] mx-auto leading-[1.6]" data-aos="fade-up" data-aos-delay="400">${profile.summary}</p>
         <div class="flex gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
-            <a href="#projects" class="magic-btn-container group">
+            <a href="#contact" class="magic-btn-container group">
                 <span class="magic-btn-border"></span>
                 <span class="magic-btn-content group-hover:text-[var(--accent-color)]">Contactame <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i></span>
             </a>
@@ -198,13 +198,12 @@ function renderBento(data) {
     const shuffledSkills2 = shuffleArray(data.skills_scroll || []);
 
     const createSkillTags = (skills) => skills.map(skill => {
-        // Leemos la clase del ícono desde el JSON, o usamos uno por defecto si falta
         const iconClass = skill.icon || "fas fa-code";
-        const skillName = skill.name || "Error";
+        const skillName = skill.name || "-";
         
         return `
-        <span class="py-2.5 px-4 text-sm font-mono font-medium rounded-xl text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] hover:text-[var(--text-primary)] transition-all cursor-default flex items-center justify-center gap-2.5 shadow-sm group/skill">
-            <i class="${iconClass} text-lg opacity-70 group-hover/skill:opacity-100 group-hover/skill:text-[var(--accent-color)] transition-colors group-hover/skill:scale-110"></i> 
+        <span class="py-1.5 px-3 text-xs font-mono font-medium rounded-lg text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] hover:text-[var(--text-primary)] transition-all cursor-default flex items-center justify-center gap-2 shadow-sm group/skill">
+            <i class="${iconClass} text-base opacity-70 group-hover/skill:opacity-100 group-hover/skill:text-[var(--accent-color)] transition-colors group-hover/skill:scale-110"></i> 
             ${skillName}
         </span>`;
     }).join('');
@@ -234,7 +233,7 @@ function renderBento(data) {
         <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 md:p-8 h-full justify-center min-h-[300px]" data-aos="fade-left" data-aos-delay="200">
             <div class="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
             <div class="relative z-10 mb-auto"><p class="text-[var(--text-secondary)] text-xs mb-2 uppercase tracking-widest font-bold">Habilidades Técnicas</p><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Stack Principal</h3></div>
-            <div class="flex gap-3 w-fit absolute right-4 h-[120%] -top-[10%] overflow-hidden mask-gradient-hero py-4">
+            <div class="flex gap-2 w-fit absolute right-4 h-[120%] -top-[10%] overflow-hidden mask-gradient-hero py-4">
                 <div class="marquee-vertical" style="--marquee-duration: 25s;">
                     <div class="marquee-content">${skillsHTML1}</div>
                     <div class="marquee-content" aria-hidden="true">${skillsHTML1}</div>

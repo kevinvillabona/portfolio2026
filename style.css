@@ -3,8 +3,8 @@
     /* --- MODO CLARO (Basado en Lumina) --- */
     --bg-primary: #f8fafc;       
     --bg-card: #ffffff;          
-    --text-primary: #1a1a2e;     /* Actualizado a Lumina */
-    --text-secondary: #5a5a72;   /* Actualizado a Lumina */
+    --text-primary: #1a1a2e;     
+    --text-secondary: #5a5a72;   
     --accent-color: #cc0000;     
     --border-color: rgba(0, 0, 0, 0.08);
     --grid-color: rgba(0, 0, 0, 0.05);
@@ -37,11 +37,10 @@ body {
     color: var(--text-primary);
     scroll-behavior: smooth;
     transition: background-color 0.5s ease, color 0.5s ease;
-    font-family: 'Plus Jakarta Sans', sans-serif; /* Tipografía principal Lumina */
-    line-height: 1.6; /* Interlineado Lumina */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
 }
 
-/* Todos los párrafos mantendrán una legibilidad óptima por defecto */
 p {
     color: var(--text-secondary);
     line-height: 1.6;
@@ -126,7 +125,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 1rem; 
     padding-bottom: 1rem;
     font-size: 0.875rem; 
-    font-weight: 600; /* Actualizado a 600 por Lumina */
+    font-weight: 600; 
     color: var(--text-primary);
     backdrop-filter: blur(64px); 
     gap: 0.5rem;
@@ -231,7 +230,7 @@ h1, h2, h3, h4, h5, h6 {
 .marquee-vertical {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem; 
     height: max-content;
 }
 
@@ -242,11 +241,11 @@ h1, h2, h3, h4, h5, h6 {
 .marquee-content {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem; 
     animation: scroll-vertical-seamless var(--marquee-duration, 20s) linear infinite;
 }
 
 @keyframes scroll-vertical-seamless {
     0% { transform: translateY(0); }
-    100% { transform: translateY(calc(-100% - 0.75rem)); }
+    100% { transform: translateY(calc(-100% - 0.5rem)); } 
 }
