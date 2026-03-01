@@ -22,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     
     <script>
         tailwind.config = {
@@ -54,7 +55,7 @@
 
     <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <div class="w-full max-w-5xl flex justify-between items-center px-6 md:px-8 py-3 rounded-full border border-[var(--border-color)] bg-[var(--nav-bg)] backdrop-blur-lg shadow-lg dark:shadow-none shadow-[var(--border-color)]">
-            <a href="#about" class="font-mono font-bold text-lg md:text-xl text-[var(--accent-color)] tracking-tighter hover:scale-110 transition-transform relative z-50">
+            <a href="#about" aria-label="Volver al inicio" class="font-mono font-bold text-lg md:text-xl text-[var(--accent-color)] tracking-tighter hover:scale-110 transition-transform relative z-50">
                 &lt;kv/&gt;
             </a>
 
@@ -73,11 +74,11 @@
                     <i class="fas fa-download text-[var(--accent-color)] animate-bounce-slow"></i>
                 </a>
 
-                <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-color)] bg-[var(--bg-primary)] hover:border-[var(--accent-color)] text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors group" title="Cambiar Tema">
+                <button id="theme-toggle" aria-label="Cambiar Tema" class="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-color)] bg-[var(--bg-primary)] hover:border-[var(--accent-color)] text-[var(--text-secondary)] hover:text-[var(--accent-color)] transition-colors group" title="Cambiar Tema">
                     <i class="fas fa-moon transition-transform duration-500 ease-in-out"></i>
                 </button>
 
-                <button id="mobile-menu-btn" class="lg:hidden w-8 h-8 flex flex-col justify-center items-center gap-1.5 outline-none group" title="Menú">
+                <button id="mobile-menu-btn" aria-label="Abrir Menú" class="lg:hidden w-8 h-8 flex flex-col justify-center items-center gap-1.5 outline-none group" title="Menú">
                     <span class="line-1 w-5 h-0.5 bg-[var(--text-secondary)] group-hover:bg-[var(--accent-color)] transition-all duration-300 rounded-full origin-center"></span>
                     <span class="line-2 w-5 h-0.5 bg-[var(--text-secondary)] group-hover:bg-[var(--accent-color)] transition-all duration-300 rounded-full origin-center"></span>
                     <span class="line-3 w-5 h-0.5 bg-[var(--text-secondary)] group-hover:bg-[var(--accent-color)] transition-all duration-300 rounded-full origin-center"></span>
@@ -116,7 +117,7 @@
     </section>
 
     <section class="max-w-5xl mx-auto px-5 md:px-10 pb-20 relative z-10 mt-10" id="metrics-container">
-        </section>
+    </section>
 
     <section class="max-w-7xl mx-auto px-5 md:px-10 pb-20 relative z-10">
         <div id="bento-grid" class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-4 md:gap-8 mx-auto">
@@ -132,7 +133,7 @@
             Principales <span class="text-[var(--accent-color)]">Competencias</span>
         </h2>
         <div id="expertise-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            </div>
+        </div>
     </section>
 
     <section class="py-20 max-w-7xl mx-auto px-5 md:px-10" id="experience">
@@ -210,8 +211,8 @@
             <div class="flex flex-col md:flex-row justify-between items-center w-full mt-20 text-sm gap-4 pt-8">
                 <p id="copyright" class="text-[var(--text-secondary)] text-sm"></p>
                 <div class="flex gap-4">
-                    <a id="social-linkedin" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all text-[var(--text-secondary)]"><i class="fab fa-linkedin-in text-lg"></i></a>
-                    <a id="social-github" href="#" target="_blank" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all text-[var(--text-secondary)]"><i class="fab fa-github text-lg"></i></a>
+                    <a id="social-linkedin" href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all text-[var(--text-secondary)]"><i class="fab fa-linkedin-in text-lg"></i></a>
+                    <a id="social-github" href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center hover:border-[var(--accent-color)] hover:text-[var(--accent-color)] transition-all text-[var(--text-secondary)]"><i class="fab fa-github text-lg"></i></a>
                 </div>
             </div>
         </div>

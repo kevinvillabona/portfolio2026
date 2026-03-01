@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initSmoothScroll(); 
-    initMobileMenu();   
+    initMobileMenu();
+    initTimelineObserver(); 
     
     fetch('data.json')
         .then(response => response.json())
@@ -147,7 +148,6 @@ function renderHero(profile) {
     `;
 }
 
-// === RENDER METRICS OPTIMIZADO PARA MOBILE ===
 function renderMetrics(metrics) {
     const container = document.getElementById('metrics-container');
     if (!container || !metrics) return;
@@ -165,7 +165,6 @@ function renderMetrics(metrics) {
     `;
 }
 
-// === RENDER EXPERTISE OPTIMIZADO PARA MOBILE ===
 function renderExpertise(expertise) {
     const container = document.getElementById('expertise-grid');
     if (!container || !expertise) return;
@@ -185,9 +184,35 @@ function renderExpertise(expertise) {
 
 function renderBento(data) {
     const grid = document.getElementById('bento-grid');
-    const skillsHTML = data.skills_scroll.map(skill => `<span class="py-2 px-3 text-sm font-mono font-medium rounded text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] hover:text-[var(--text-primary)] transition-colors cursor-default">${skill}</span>`).join('');
     
-    const educationHTML = data.education.map(edu => `
+    const shuffleArray = (array) => {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    };
+
+    const shuffledSkills1 = shuffleArray(data.skills_scroll || []);
+    const shuffledSkills2 = shuffleArray(data.skills_scroll || []);
+
+    const createSkillTags = (skills) => skills.map(skill => {
+        // Leemos la clase del ícono desde el JSON, o usamos uno por defecto si falta
+        const iconClass = skill.icon || "fas fa-code";
+        const skillName = skill.name || "Error";
+        
+        return `
+        <span class="py-2.5 px-4 text-sm font-mono font-medium rounded-xl text-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)] whitespace-nowrap hover:border-[var(--accent-color)] hover:text-[var(--text-primary)] transition-all cursor-default flex items-center justify-center gap-2.5 shadow-sm group/skill">
+            <i class="${iconClass} text-lg opacity-70 group-hover/skill:opacity-100 group-hover/skill:text-[var(--accent-color)] transition-colors group-hover/skill:scale-110"></i> 
+            ${skillName}
+        </span>`;
+    }).join('');
+
+    const skillsHTML1 = createSkillTags(shuffledSkills1);
+    const skillsHTML2 = createSkillTags(shuffledSkills2);
+    
+    const educationHTML = (data.education || []).map(edu => `
         <div class="flex items-start gap-3 mb-5 last:mb-0 group/edu">
             <div class="mt-1 min-w-[30px] h-[30px] rounded-lg bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--accent-color)] group-hover/edu:scale-110 transition-transform"><i class="fas fa-graduation-cap text-sm"></i></div>
             <div>
@@ -210,15 +235,21 @@ function renderBento(data) {
             <div class="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
             <div class="relative z-10 mb-auto"><p class="text-[var(--text-secondary)] text-xs mb-2 uppercase tracking-widest font-bold">Habilidades Técnicas</p><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">Stack Principal</h3></div>
             <div class="flex gap-3 w-fit absolute right-4 h-[120%] -top-[10%] overflow-hidden mask-gradient-hero py-4">
-                <div class="flex flex-col gap-3 animate-scroll-vertical">${skillsHTML}${skillsHTML}</div>
-                <div class="flex flex-col gap-3 animate-scroll-vertical" style="animation-delay: -5s;">${skillsHTML}${skillsHTML}</div>
+                <div class="marquee-vertical" style="--marquee-duration: 25s;">
+                    <div class="marquee-content">${skillsHTML1}</div>
+                    <div class="marquee-content" aria-hidden="true">${skillsHTML1}</div>
+                </div>
+                <div class="marquee-vertical" style="--marquee-duration: 35s;">
+                    <div class="marquee-content">${skillsHTML2}</div>
+                    <div class="marquee-content" aria-hidden="true">${skillsHTML2}</div>
+                </div>
             </div>
         </div>
         <div class="md:col-span-3 lg:col-span-2 glow-card rounded-3xl relative overflow-hidden flex flex-col p-6 md:p-8 min-h-[200px]" data-aos="fade-up" data-aos-delay="300">
              <div class="font-mono text-[10px] absolute inset-0 text-[var(--text-secondary)] opacity-10 p-4 leading-relaxed overflow-hidden select-none z-0">import pandas as pd<br>df = pd.read_csv('data.csv')<br>model.fit(X_train, y_train)<br># Future Loading...</div>
              <div class="relative z-10 flex flex-col h-full">
-                <div><div class="inline-block px-2.5 py-1 mb-3 text-[10px] font-bold tracking-wider text-[var(--accent-color)] uppercase bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full shadow-sm"><i class="fas fa-circle text-[6px] mr-1.5 animate-pulse"></i> Activo</div><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">${data.status.current}</h3></div>
-                <div class="mt-4"><p class="mb-4 text-sm text-[var(--text-secondary)]">${data.status.description}</p><a href="${data.profile.github}" target="_blank" class="text-sm font-[600] text-[var(--text-primary)] hover:text-[var(--accent-color)] flex items-center gap-2 transition-colors">Ver actividad en GitHub <i class="fas fa-arrow-right"></i></a></div>
+                <div><div class="inline-block px-2.5 py-1 mb-3 text-[10px] font-bold tracking-wider text-[var(--accent-color)] uppercase bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full shadow-sm"><i class="fas fa-circle text-[6px] mr-1.5 animate-pulse"></i> Activo</div><h3 class="font-heading font-[800] text-[1.5rem] text-[var(--text-primary)]">${data.status?.current || ''}</h3></div>
+                <div class="mt-4"><p class="mb-4 text-sm text-[var(--text-secondary)]">${data.status?.description || ''}</p><a href="${data.profile.github}" target="_blank" rel="noopener noreferrer" class="text-sm font-[600] text-[var(--text-primary)] hover:text-[var(--accent-color)] flex items-center gap-2 transition-colors">Ver actividad en GitHub <i class="fas fa-arrow-right"></i></a></div>
              </div>
         </div>
         <div class="md:col-span-3 lg:col-span-3 glow-card rounded-3xl relative overflow-hidden group cursor-pointer" onclick="document.getElementById('nav-cv-btn').click()" data-aos="zoom-in" data-aos-delay="400">
@@ -265,7 +296,7 @@ function renderProjects(projects) {
                     <p class="line-clamp-2 mb-6 drop-shadow-sm text-sm text-[var(--text-secondary)]">${proj.desc}</p>
                     <div class="flex flex-row items-center justify-between gap-4 mt-2">
                         <div class="flex flex-wrap gap-2">${tagsHTML}</div>
-                        <a href="${proj.link}" target="_blank" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm font-[600] group/btn hover:brightness-110 hover:border-[var(--accent-color)] transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-[var(--border-color)] text-nowrap shadow-sm">
+                        <a href="${proj.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[var(--accent-color)] text-sm font-[600] group/btn hover:brightness-110 hover:border-[var(--accent-color)] transition-all cursor-pointer bg-[var(--bg-primary)]/80 backdrop-blur-sm px-5 py-2.5 rounded-full border border-[var(--border-color)] text-nowrap shadow-sm">
                             ${btnText} <i class="${btnIcon} transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                         </a>
                     </div>
@@ -341,7 +372,7 @@ function renderSandbox(sandboxProjects) {
                 <p class="line-clamp-2 mb-6 text-sm text-[var(--text-secondary)]">${proj.desc}</p>
                 <div class="flex flex-row items-center justify-between gap-4 mt-2">
                     <div class="flex flex-wrap gap-2">${tagsHTML}</div>
-                    <a href="${proj.link}" target="_blank" class="w-11 h-11 flex items-center justify-center rounded-full bg-[var(--bg-primary)]/80 backdrop-blur-sm border border-[var(--border-color)] text-[var(--text-primary)] hover:text-[var(--accent-color)] hover:border-[var(--accent-color)] hover:scale-110 transition-all shadow-sm">
+                    <a href="${proj.link}" target="_blank" rel="noopener noreferrer" aria-label="Ver código en GitHub" class="w-11 h-11 flex items-center justify-center rounded-full bg-[var(--bg-primary)]/80 backdrop-blur-sm border border-[var(--border-color)] text-[var(--text-primary)] hover:text-[var(--accent-color)] hover:border-[var(--accent-color)] hover:scale-110 transition-all shadow-sm">
                         <i class="fab fa-github text-xl"></i>
                     </a>
                 </div>
@@ -351,12 +382,43 @@ function renderSandbox(sandboxProjects) {
     }).join('');
 }
 
+// === CONTROL DE LÍNEA DE TIEMPO Y OPTIMIZACIÓN (INTERSECTION OBSERVER) ===
 let timelineSegments = [];
-let animationFrameId;
+let animationFrameId = null;
+let isExperienceVisible = false;
+
+function initTimelineObserver() {
+    const experienceSection = document.getElementById('experience');
+    if (!experienceSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            isExperienceVisible = entry.isIntersecting;
+            
+            if (isExperienceVisible) {
+                // Si entra en vista y no se está animando, la arrancamos
+                if (!animationFrameId && timelineSegments.length > 0) {
+                    loopAnimation();
+                }
+            } else {
+                // Si sale de la vista, paramos la animación para ahorrar recursos
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+            }
+        });
+    }, { rootMargin: '200px 0px' }); // Activamos un poco antes de que sea visible
+
+    observer.observe(experienceSection);
+}
 
 function renderExperience(experience) {
     const container = document.getElementById('experience-grid');
-    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
     
     container.className = "timeline-container max-w-6xl mx-auto px-4 sm:px-6";
     container.innerHTML = `<svg id="timeline-canvas" class="timeline-svg"></svg>`;
@@ -483,10 +545,20 @@ function initTimelineLines(count) {
             }
         }
     }
-    if (!animationFrameId) loopAnimation();
+    
+    // Solo arrancamos el bucle si la sección está visible
+    if (!animationFrameId && isExperienceVisible) {
+        loopAnimation();
+    }
 }
 
 function loopAnimation() {
+    // Validación extra: si la sección dejó de estar visible, detenemos el frame
+    if (!isExperienceVisible) {
+        animationFrameId = null;
+        return;
+    }
+
     const triggerPoint = window.scrollY + (window.innerHeight * 0.5);
     timelineSegments.forEach(segment => {
         const totalDist = segment.absEndY - segment.absStartY;
@@ -507,8 +579,10 @@ function loopAnimation() {
             if (segment.currentProgress > 0.01) segment.startDot.classList.add('visible');
         }
     });
+    
     const firstDot = document.getElementById('dot-0');
     if (firstDot && window.scrollY > 0) firstDot.classList.add('visible');
+    
     animationFrameId = requestAnimationFrame(loopAnimation);
 }
 

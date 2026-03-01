@@ -226,3 +226,27 @@ h1, h2, h3, h4, h5, h6 {
 .form-container input:focus, .form-container textarea:focus {
     box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb, 204, 0, 0), 0.2);
 }
+
+/* === ANIMACIÓN INFINITA CARROUSEL HABILIDADES (SEAMLESS MARQUEE) === */
+.marquee-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    height: max-content;
+}
+
+.marquee-vertical:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+.marquee-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: scroll-vertical-seamless var(--marquee-duration, 20s) linear infinite;
+}
+
+@keyframes scroll-vertical-seamless {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(-100% - 0.75rem)); }
+}
